@@ -1,0 +1,118 @@
+/* ── Swimming Page ── */
+.swimming-page {
+  min-height: 100vh;
+}
+
+/* ── Hero Banner ── */
+.swimming-hero {
+  position: relative;
+  padding: var(--space-4xl) 0 var(--space-3xl);
+  text-align: center;
+  background: var(--bg-cream);
+  border-bottom: var(--border-thick) solid var(--border-color);
+  overflow: hidden;
+}
+
+.swimming-hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 60px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    90deg,
+    var(--electric-blue) 0%,
+    var(--pool-blue) 50%,
+    var(--deep-blue) 100%
+  );
+  border-top: var(--border-width) solid var(--border-color);
+  border-bottom: var(--border-width) solid var(--border-color);
+  z-index: 0;
+}
+
+.swimming-hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+.swimming-hero__heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-black);
+  background: var(--bg-cream);
+  display: inline-block;
+  padding: var(--space-sm) var(--space-xl);
+  border: var(--border-thick) solid var(--border-color);
+  box-shadow: var(--shadow-brutal);
+}
+
+.swimming-hero__subtitle {
+  margin-top: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+/* ── Sections ── */
+.swimming-section {
+  padding: var(--space-4xl) 0;
+}
+
+.swimming-section--accessories {
+  background: var(--bg-cream);
+  border-top: var(--border-thick) solid var(--border-color);
+}
+
+.swimming-section__header {
+  margin-bottom: var(--space-2xl);
+}
+
+.swimming-section__heading {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Accessories Grid ── */
+.accessories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .accessories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .swimming-hero {
+    padding: var(--space-3xl) 0 var(--space-2xl);
+  }
+
+  .swimming-hero::before {
+    height: 45px;
+  }
+
+  .swimming-hero__heading {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  .swimming-hero__subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .accessories-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,292 @@
+/* ══════════════════════════════════════
+   Hero Section — Darur Life Studio
+   ══════════════════════════════════════ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-white);
+}
+
+/* ── Decorative horizontal lines ── */
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--ink-black);
+  z-index: 1;
+}
+
+.hero::before {
+  top: 15%;
+}
+
+.hero::after {
+  bottom: 12%;
+}
+
+/* ── Container ── */
+.hero__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-2xl);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Left Content ── */
+.hero__content {
+  position: relative;
+  z-index: 3;
+}
+
+.hero__heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin-bottom: var(--space-xl);
+}
+
+.hero__word {
+  display: block;
+  font-size: clamp(4rem, 10vw, 8rem);
+  letter-spacing: -0.04em;
+  overflow: hidden;
+}
+
+.hero__word--swim {
+  color: var(--electric-blue);
+}
+
+.hero__word--lift {
+  color: var(--neon-green);
+}
+
+.hero__word--elevate {
+  color: var(--vibrant-coral);
+}
+
+.hero__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2xl);
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+/* ── CTA Buttons ── */
+.hero__ctas {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* ── Right Side — Geometric Shape ── */
+.hero__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 500px;
+}
+
+.hero__geometric {
+  width: 380px;
+  height: 460px;
+  background: var(--electric-blue);
+  border: var(--border-thick) solid var(--ink-black);
+  box-shadow: 8px 8px 0px var(--ink-black);
+  transform: rotate(6deg);
+  position: relative;
+}
+
+.hero__geometric::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: var(--sunny-yellow);
+  border: var(--border-thick) solid var(--ink-black);
+  box-shadow: 4px 4px 0px var(--ink-black);
+}
+
+.hero__geometric::after {
+  content: '';
+  position: absolute;
+  bottom: -25px;
+  left: -25px;
+  width: 80px;
+  height: 80px;
+  background: var(--neon-green);
+  border: var(--border-thick) solid var(--ink-black);
+  box-shadow: 4px 4px 0px var(--ink-black);
+  transform: rotate(-12deg);
+}
+
+/* ── Floating Badges ── */
+.hero__badges {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-md);
+  z-index: 10;
+  padding-top: var(--space-xl);
+  padding-right: var(--space-lg);
+}
+
+.hero__badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-sm) var(--space-lg);
+  border: 3px solid var(--ink-black);
+  box-shadow: var(--shadow-brutal-sm);
+  white-space: nowrap;
+}
+
+.hero__badge--rating {
+  background: var(--sunny-yellow);
+  color: var(--ink-black);
+}
+
+.hero__badge--anniversary {
+  background: var(--vibrant-coral);
+  color: var(--text-light);
+}
+
+/* ── Decorative scattered squares ── */
+.hero__deco-square {
+  position: absolute;
+  border: 3px solid var(--ink-black);
+  z-index: 1;
+}
+
+.hero__deco-square--1 {
+  width: 24px;
+  height: 24px;
+  background: var(--vibrant-coral);
+  top: 22%;
+  left: 6%;
+  transform: rotate(15deg);
+}
+
+.hero__deco-square--2 {
+  width: 18px;
+  height: 18px;
+  background: var(--neon-green);
+  bottom: 28%;
+  left: 45%;
+  transform: rotate(-20deg);
+}
+
+.hero__deco-square--3 {
+  width: 30px;
+  height: 30px;
+  background: var(--sunny-yellow);
+  top: 35%;
+  right: 8%;
+  transform: rotate(30deg);
+}
+
+.hero__deco-square--4 {
+  width: 16px;
+  height: 16px;
+  background: var(--electric-blue);
+  bottom: 18%;
+  right: 22%;
+  transform: rotate(-10deg);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero__geometric {
+    width: 300px;
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 6rem 0 4rem;
+  }
+
+  .hero::before,
+  .hero::after {
+    display: none;
+  }
+
+  .hero__container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__ctas {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .hero__ctas .brutal-btn {
+    width: 100%;
+  }
+
+  .hero__visual {
+    min-height: 300px;
+  }
+
+  .hero__geometric {
+    width: 240px;
+    height: 300px;
+    transform: rotate(4deg);
+  }
+
+  .hero__badges {
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: var(--space-md) 0;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__deco-square {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__geometric {
+    width: 200px;
+    height: 250px;
+  }
+
+  .hero__word {
+    font-size: clamp(3rem, 16vw, 5rem);
+  }
+}

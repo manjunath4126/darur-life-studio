@@ -1,0 +1,172 @@
+/* ══════════════════════════════════════
+   Gallery Section — Darur Life Studio
+   ══════════════════════════════════════ */
+
+.gallery {
+  background: var(--bg-white);
+  position: relative;
+}
+
+.gallery__heading {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3xl);
+  letter-spacing: -0.02em;
+}
+
+/* ── Masonry-like Grid ── */
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  gap: var(--space-lg);
+}
+
+/* Varying heights for masonry effect */
+.gallery__item:nth-child(1) {
+  grid-row: span 2;
+}
+
+.gallery__item:nth-child(2) {
+  grid-row: span 1;
+}
+
+.gallery__item:nth-child(3) {
+  grid-row: span 2;
+}
+
+.gallery__item:nth-child(4) {
+  grid-row: span 1;
+}
+
+.gallery__item:nth-child(5) {
+  grid-row: span 1;
+}
+
+.gallery__item:nth-child(6) {
+  grid-row: span 1;
+}
+
+/* ── Gallery Item (Placeholder) ── */
+.gallery__item {
+  border: var(--border-thick) solid var(--ink-black);
+  box-shadow: var(--shadow-brutal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  transition: transform var(--transition-bounce), box-shadow var(--transition-bounce);
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery__item:hover {
+  transform: scale(1.03) translate(-2px, -2px);
+  box-shadow: 8px 8px 0px #000000;
+  z-index: 2;
+}
+
+/* ── Color backgrounds ── */
+.gallery__item--pool {
+  background: var(--electric-blue);
+}
+
+.gallery__item--gym {
+  background: var(--neon-green);
+}
+
+.gallery__item--training {
+  background: var(--vibrant-coral);
+}
+
+.gallery__item--members {
+  background: var(--deep-blue);
+}
+
+.gallery__item--facility {
+  background: var(--sunny-yellow);
+}
+
+.gallery__item--events {
+  background: var(--chlorine-green);
+}
+
+/* ── Placeholder content ── */
+.gallery__icon {
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+.gallery__item--pool .gallery__icon,
+.gallery__item--training .gallery__icon,
+.gallery__item--members .gallery__icon,
+.gallery__item--events .gallery__icon {
+  color: var(--text-light);
+}
+
+.gallery__item--gym .gallery__icon,
+.gallery__item--facility .gallery__icon {
+  color: var(--ink-black);
+}
+
+.gallery__label {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gallery__item--pool .gallery__label,
+.gallery__item--training .gallery__label,
+.gallery__item--members .gallery__label,
+.gallery__item--events .gallery__label {
+  color: var(--text-light);
+}
+
+.gallery__item--gym .gallery__label,
+.gallery__item--facility .gallery__label {
+  color: var(--ink-black);
+}
+
+.gallery__sublabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+}
+
+.gallery__item--pool .gallery__sublabel,
+.gallery__item--training .gallery__sublabel,
+.gallery__item--members .gallery__sublabel,
+.gallery__item--events .gallery__sublabel {
+  color: var(--text-light);
+}
+
+.gallery__item--gym .gallery__sublabel,
+.gallery__item--facility .gallery__sublabel {
+  color: var(--ink-black);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+  }
+
+  .gallery__item:nth-child(1),
+  .gallery__item:nth-child(3) {
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery__grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 160px;
+  }
+}

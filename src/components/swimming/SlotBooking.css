@@ -1,0 +1,234 @@
+/* ── SlotBooking ── */
+.slot-booking {
+  padding: var(--space-2xl) 0;
+}
+
+.slot-booking__header {
+  margin-bottom: var(--space-2xl);
+}
+
+.slot-booking__heading {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.slot-booking__calendar-wrap {
+  margin-bottom: var(--space-2xl);
+}
+
+/* ── Period Label ── */
+.slot-booking__period {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.slot-booking__period-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.slot-booking__period-line {
+  flex: 1;
+  height: 3px;
+  background: var(--border-color);
+}
+
+/* ── Slots Grid ── */
+.slot-booking__slots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+/* ── Individual Slot Card ── */
+.slot-card {
+  background: var(--card-white);
+  border: var(--border-thick) solid var(--border-color);
+  box-shadow: var(--shadow-brutal-sm);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: transform var(--transition-bounce),
+              box-shadow var(--transition-bounce),
+              background var(--transition-fast),
+              border-color var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+}
+
+.slot-card:hover:not(.slot-card--full) {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-brutal);
+}
+
+.slot-card:active:not(.slot-card--full) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000;
+}
+
+/* Available slot - blue left accent */
+.slot-card--available {
+  border-left: 6px solid var(--electric-blue);
+}
+
+/* Selected slot - yellow bg */
+.slot-card--selected {
+  background: var(--sunny-yellow);
+  border-color: var(--ink-black);
+  border-width: var(--border-thick);
+  box-shadow: var(--shadow-brutal);
+  transform: translate(-2px, -2px);
+}
+
+.slot-card--selected:hover {
+  background: var(--yellow-hover);
+}
+
+/* Full slot - greyed out */
+.slot-card--full {
+  background: #e9e9e9;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.slot-card__time {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.slot-card--full .slot-card__time {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.slot-card__spots {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.slot-card--full .slot-card__spots {
+  color: var(--vibrant-coral);
+}
+
+.slot-card--selected .slot-card__spots {
+  color: var(--ink-black);
+}
+
+.slot-card__book-btn {
+  margin-top: var(--space-sm);
+  align-self: flex-start;
+}
+
+.slot-card--full .slot-card__book-btn {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ── Booking Summary ── */
+.slot-booking__summary {
+  margin-top: var(--space-2xl);
+  background: var(--card-white);
+  border: var(--border-thick) solid var(--border-color);
+  box-shadow: var(--shadow-brutal-lg);
+  padding: var(--space-xl) var(--space-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.slot-booking__summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.slot-booking__summary-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.slot-booking__summary-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.slot-booking__summary-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.slot-booking__summary-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.slot-booking__summary-value {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.slot-booking__summary-price {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deep-blue);
+  white-space: nowrap;
+}
+
+.slot-booking__summary-empty {
+  text-align: center;
+  width: 100%;
+  padding: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .slot-booking__slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .slot-booking__summary {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .slot-booking__summary-row {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .slot-booking__slots-grid {
+    grid-template-columns: 1fr;
+  }
+}

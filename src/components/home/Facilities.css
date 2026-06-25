@@ -1,0 +1,157 @@
+/* ══════════════════════════════════════
+   Facilities Section — Darur Life Studio
+   ══════════════════════════════════════ */
+
+.facilities {
+  background: var(--bg-white);
+  position: relative;
+}
+
+.facilities__heading {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3xl);
+  letter-spacing: -0.02em;
+}
+
+.facilities__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2xl);
+}
+
+/* ── Facility Card ── */
+.facilities__card {
+  background: var(--card-white);
+  border: var(--border-thick) solid var(--ink-black);
+  box-shadow: var(--shadow-brutal);
+  padding: var(--space-2xl);
+  position: relative;
+  overflow: visible;
+  transition: transform var(--transition-bounce), box-shadow var(--transition-bounce);
+}
+
+.facilities__card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0px #000000;
+}
+
+/* Left border accent */
+.facilities__card--swim {
+  border-left: 8px solid var(--electric-blue);
+}
+
+.facilities__card--gym {
+  border-left: 8px solid var(--neon-green);
+}
+
+/* ── Rotated sticker badge ── */
+.facilities__sticker {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  padding: var(--space-xs) var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 3px solid var(--ink-black);
+  box-shadow: 3px 3px 0px var(--ink-black);
+  transform: rotate(8deg);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.facilities__sticker--swim {
+  background: var(--electric-blue);
+  color: var(--text-light);
+}
+
+.facilities__sticker--gym {
+  background: var(--neon-green);
+  color: var(--ink-black);
+}
+
+/* ── Card icon ── */
+.facilities__icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--ink-black);
+  box-shadow: 3px 3px 0px var(--ink-black);
+  font-size: 1.8rem;
+  margin-bottom: var(--space-lg);
+}
+
+.facilities__icon--swim {
+  background: var(--electric-blue);
+  color: var(--text-light);
+}
+
+.facilities__icon--gym {
+  background: var(--neon-green);
+  color: var(--ink-black);
+}
+
+/* ── Card title ── */
+.facilities__card-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Features list ── */
+.facilities__features {
+  list-style: none;
+  margin-bottom: var(--space-xl);
+}
+
+.facilities__feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  border-bottom: 2px dashed var(--bg-cream);
+}
+
+.facilities__feature:last-child {
+  border-bottom: none;
+}
+
+.facilities__check {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.facilities__check--swim {
+  color: var(--electric-blue);
+}
+
+.facilities__check--gym {
+  color: var(--neon-green);
+}
+
+/* ── Card CTA ── */
+.facilities__cta {
+  display: inline-flex;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .facilities__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .facilities__card {
+    padding: var(--space-xl);
+  }
+}

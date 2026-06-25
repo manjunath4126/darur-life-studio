@@ -1,0 +1,92 @@
+.auth-page {
+  min-height: 90vh;
+  background-color: var(--bg-cream);
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-4xl) var(--space-md);
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+  background-color: var(--card-white);
+  z-index: 10;
+  position: relative;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.w-half {
+  width: 50%;
+}
+
+.auth-error-banner {
+  background-color: var(--vibrant-coral);
+  color: var(--text-light);
+  border: var(--border-width) solid var(--border-color);
+  padding: var(--space-sm);
+  box-shadow: var(--shadow-brutal-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.auth-form .form-group label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+}
+
+/* Decorative scattered dots/squares */
+.decor-dot {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-brutal-sm);
+}
+
+.bg-blue { background-color: var(--electric-blue); }
+.bg-green { background-color: var(--neon-green); }
+.bg-coral { background-color: var(--vibrant-coral); }
+.bg-yellow { background-color: var(--sunny-yellow); }
+
+.dot-1 {
+  top: 15%;
+  left: 10%;
+  transform: rotate(15deg);
+}
+
+.dot-2 {
+  top: 75%;
+  left: 12%;
+  transform: rotate(-10deg);
+}
+
+.dot-3 {
+  top: 25%;
+  right: 15%;
+  transform: rotate(45deg);
+}
+
+.dot-4 {
+  top: 80%;
+  right: 8%;
+  transform: rotate(-30deg);
+}
+
+@media (max-width: 768px) {
+  .decor-dot {
+    display: none;
+  }
+}

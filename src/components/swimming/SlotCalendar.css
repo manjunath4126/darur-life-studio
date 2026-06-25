@@ -1,0 +1,95 @@
+/* ── SlotCalendar ── */
+.slot-calendar {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  padding: var(--space-sm) 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.slot-calendar::-webkit-scrollbar {
+  display: none;
+}
+
+.slot-calendar__day-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 72px;
+  padding: var(--space-md) var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--card-white);
+  border: var(--border-thick) solid var(--border-color);
+  box-shadow: var(--shadow-brutal-sm);
+  cursor: pointer;
+  transition: transform var(--transition-bounce),
+              box-shadow var(--transition-bounce),
+              background var(--transition-fast);
+  position: relative;
+}
+
+.slot-calendar__day-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-brutal);
+}
+
+.slot-calendar__day-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000;
+}
+
+.slot-calendar__day-btn--selected {
+  background: var(--sunny-yellow);
+  box-shadow: var(--shadow-brutal);
+  transform: translate(-2px, -2px);
+}
+
+.slot-calendar__day-btn--selected:hover {
+  background: var(--yellow-hover);
+  box-shadow: 7px 7px 0px #000;
+}
+
+.slot-calendar__day-name {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.slot-calendar__day-btn--selected .slot-calendar__day-name {
+  color: var(--ink-black);
+}
+
+.slot-calendar__day-number {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Today coral dot */
+.slot-calendar__today-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vibrant-coral);
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  border: 1.5px solid var(--ink-black);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .slot-calendar__day-btn {
+    min-width: 60px;
+    padding: var(--space-sm) var(--space-sm);
+  }
+
+  .slot-calendar__day-number {
+    font-size: 1.1rem;
+  }
+}
