@@ -1,13 +1,8 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LuCalendar, LuClock, LuPlus, LuMinus, LuCheck } from 'react-icons/lu';
+import { LuCalendar, LuClock, LuCheck } from 'react-icons/lu';
 import SlotCalendar from './SlotCalendar.jsx';
 import './SlotBooking.css';
-
-const START_TIMES = [
-  '06:00 AM', '07:00 AM', '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM',
-  '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM'
-];
 
 const PRICE_PER_HOUR = 150;
 
@@ -15,37 +10,67 @@ export default function SlotBooking() {
   const todayStr = new Date().toISOString().split('T')[0];
   const [selectedDate, setSelectedDate] = useState(todayStr);
   const [startTime, setStartTime] = useState('');
-  const [duration, setDuration] = useState(1);
+  const [endTime, setEndTime] = useState('');
   const [isBooked, setIsBooked] = useState(false);
-
-  const totalPrice = useMemo(() => duration * PRICE_PER_HOUR, [duration]);
 
   const handleDateChange = (dateStr) => {
     setSelectedDate(dateStr);
     setIsBooked(false);
   };
 
-  const handleTimeSelect = (time) => {
-    setStartTime(time);
-    setIsBooked(false);
+  // Convert "HH:MM" 24h to minutes
+  const parseTimeToMinutes = (timeStr) => {
+    if (!timeStr) return 0;
+    const [h, m] = timeStr.split(':').map(Number);
+    return h * 60 + m;
   };
 
-  const incrementDuration = () => {
-    if (duration < 5) setDuration(prev => prev + 1);
+  const startMins = useMemo(() => parseTimeToMinutes(startTime), [startTime]);
+  const endMins = useMemo(() => parseTimeToMinutes(endTime), [endTime]);
+
+  const durationMins = useMemo(() => {
+    if (!startTime || !endTime) return 0;
+    return endMins - startMins;
+  }, [startTime, endTime, startMins, endMins]);
+
+  const isValid = useMemo(() => {
+    return startTime && endTime && durationMins > 0;
+  }, [startTime, endTime, durationMins]);
+
+  const totalPrice = useMemo(() => {
+    if (!isValid) return 0;
+    const hours = durationMins / 60;
+    return Math.round(hours * PRICE_PER_HOUR);
+  }, [isValid, durationMins]);
+
+  // Convert "15:30" to "03:30 PM"
+  const format12Hour = (time24) => {
+    if (!time24) return '';
+    let [h, m] = time24.split(':').map(Number);
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    const mStr = m.toString().padStart(2, '0');
+    return `${h.toString().padStart(2, '0')}:${mStr} ${ampm}`;
   };
 
-  const decrementDuration = () => {
-    if (duration > 1) setDuration(prev => prev - 1);
+  // Format total minutes to readable text (e.g. "1 Hr 30 Mins")
+  const formatDurationText = (mins) => {
+    if (mins <= 0) return '';
+    const hrs = Math.floor(mins / 60);
+    const m = mins % 60;
+    const hrsText = hrs > 0 ? `${hrs} Hr${hrs > 1 ? 's' : ''}` : '';
+    const minsText = m > 0 ? `${m} Min${m > 1 ? 's' : ''}` : '';
+    return `${hrsText} ${minsText}`.trim();
   };
 
   const handleConfirmBooking = () => {
-    if (!startTime) return;
+    if (!isValid) return;
 
     // Simulate saving the booking to localStorage for Dashboard page
     const newBooking = {
       id: `b-${Date.now()}`,
       date: selectedDate,
-      time: `${startTime} (${duration} ${duration === 1 ? 'Hour' : 'Hours'})`,
+      time: `${format12Hour(startTime)} to ${format12Hour(endTime)} (${formatDurationText(durationMins)})`,
       type: 'Swimming Booking',
       status: 'CONFIRMED',
       price: `₹${totalPrice}`,
@@ -62,7 +87,7 @@ export default function SlotBooking() {
     setTimeout(() => {
       setIsBooked(false);
       setStartTime('');
-      setDuration(1);
+      setEndTime('');
     }, 2500);
   };
 
@@ -80,7 +105,7 @@ export default function SlotBooking() {
       {/* Header */}
       <div className="slot-booking__header">
         <span className="section-label">// BOOK A LANE</span>
-        <h2 className="slot-booking__heading section-title">SELECT TIMING &amp; DURATION</h2>
+        <h2 className="slot-booking__heading section-title">BUILD YOUR LANE SESSION</h2>
       </div>
 
       {/* Calendar strip */}
@@ -92,72 +117,71 @@ export default function SlotBooking() {
       </div>
 
       <div className="slot-booking__selection-grid">
-        {/* Start Time Selector */}
-        <div className="slot-booking__box brutal-card">
+        {/* Precise Time Pickers */}
+        <div className="slot-booking__box brutal-card time-pickers-box">
           <h3 className="text-mono mb-md flex items-center gap-xs">
-            <LuClock /> SELECT START TIME
+            <LuClock /> CHOOSE EXACT TIMING
           </h3>
-          <div className="start-times-grid">
-            {START_TIMES.map((time) => (
-              <button
-                key={time}
-                onClick={() => handleTimeSelect(time)}
-                className={`brutal-btn brutal-btn--sm start-time-btn ${startTime === time ? 'brutal-btn--primary' : 'brutal-btn--ghost'}`}
-                type="button"
-              >
-                {time}
-              </button>
-            ))}
+          
+          <div className="time-inputs-container">
+            <div className="time-input-group">
+              <label htmlFor="startTime">START TIME</label>
+              <input
+                type="time"
+                id="startTime"
+                value={startTime}
+                onChange={(e) => { setStartTime(e.target.value); setIsBooked(false); }}
+                className="brutal-input brutal-time-picker"
+                required
+              />
+            </div>
+            
+            <div className="time-input-group">
+              <label htmlFor="endTime">END TIME</label>
+              <input
+                type="time"
+                id="endTime"
+                value={endTime}
+                onChange={(e) => { setEndTime(e.target.value); setIsBooked(false); }}
+                className="brutal-input brutal-time-picker"
+                required
+              />
+            </div>
           </div>
+          
+          {startTime && endTime && durationMins <= 0 && (
+            <p className="validation-error text-mono mt-md">
+              ⚠ END TIME MUST BE AFTER START TIME!
+            </p>
+          )}
         </div>
 
-        {/* Duration Selector */}
+        {/* Pricing Rate Box */}
         <div className="slot-booking__box brutal-card duration-box">
           <h3 className="text-mono mb-md">
-            ⌛ SELECT DURATION
+            🌊 POOL RATE
           </h3>
-          <p className="duration-rate text-mono mb-lg">RATE: ₹{PRICE_PER_HOUR} / hour</p>
-          
-          <div className="duration-counter">
-            <button
-              onClick={decrementDuration}
-              className="brutal-btn brutal-btn--sm brutal-btn--ghost counter-btn"
-              type="button"
-              disabled={duration <= 1}
-            >
-              <LuMinus />
-            </button>
-            <span className="duration-value text-mono">
-              {duration} {duration === 1 ? 'HOUR' : 'HOURS'}
-            </span>
-            <button
-              onClick={incrementDuration}
-              className="brutal-btn brutal-btn--sm brutal-btn--ghost counter-btn"
-              type="button"
-              disabled={duration >= 5}
-            >
-              <LuPlus />
-            </button>
-          </div>
-          
-          <p className="duration-note text-sm mt-md">Max 5 hours per booking session.</p>
+          <h2 className="rate-value text-mono mb-sm">₹{PRICE_PER_HOUR} / Hour</h2>
+          <p className="rate-subtext">Precise billing down to the minute!</p>
+          <div className="brutal-divider"></div>
+          <p className="duration-note text-sm">Example: 1 Hour 30 Minutes costs ₹225.</p>
         </div>
       </div>
 
       {/* Booking Summary */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={startTime || 'empty'}
+          key={isValid ? 'valid' : 'empty'}
           className="slot-booking__summary"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
         >
-          {startTime ? (
+          {isValid ? (
             <>
               <div className="slot-booking__summary-details">
-                <span className="slot-booking__summary-title">Booking Details</span>
+                <span className="slot-booking__summary-title">Lane Session Invoice</span>
                 <div className="slot-booking__summary-row">
                   <div className="slot-booking__summary-item">
                     <LuCalendar size={16} />
@@ -168,14 +192,16 @@ export default function SlotBooking() {
                   </div>
                   <div className="slot-booking__summary-item">
                     <LuClock size={16} />
-                    <span className="slot-booking__summary-label">Start Time:</span>
-                    <span className="slot-booking__summary-value">{startTime}</span>
+                    <span className="slot-booking__summary-label">Timing:</span>
+                    <span className="slot-booking__summary-value">
+                      {format12Hour(startTime)} – {format12Hour(endTime)}
+                    </span>
                   </div>
                   <div className="slot-booking__summary-item">
                     <span>⌛</span>
                     <span className="slot-booking__summary-label">Duration:</span>
                     <span className="slot-booking__summary-value">
-                      {duration} {duration === 1 ? 'Hour' : 'Hours'}
+                      {formatDurationText(durationMins)}
                     </span>
                   </div>
                 </div>
@@ -194,7 +220,7 @@ export default function SlotBooking() {
             </>
           ) : (
             <span className="slot-booking__summary-empty">
-              ← Select a start time above to build your session
+              ← Select a date, then enter a valid start and end time above to proceed
             </span>
           )}
         </motion.div>

@@ -30,21 +30,53 @@
   padding: var(--space-xl) !important;
 }
 
-/* ── Start Times Selector ── */
-.start-times-grid {
+/* ── Time Pickers Box ── */
+.time-pickers-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-inputs-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
+  margin-top: var(--space-sm);
 }
 
-.start-time-btn {
-  text-align: center;
-  width: 100%;
+.time-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.time-input-group label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.brutal-time-picker {
+  height: 52px;
+  font-size: 1.1rem !important;
   font-family: var(--font-mono) !important;
-  font-size: 0.9rem !important;
+  font-weight: 700;
+  padding: 0 var(--space-md) !important;
+  display: flex;
+  align-items: center;
 }
 
-/* ── Duration Selector ── */
+.validation-error {
+  color: var(--vibrant-coral);
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: #FFF0F0;
+  border: 2px solid var(--vibrant-coral);
+  padding: var(--space-sm);
+  box-shadow: 2px 2px 0px var(--vibrant-coral);
+}
+
+/* ── Pool Rate Card ── */
 .duration-box {
   display: flex;
   flex-direction: column;
@@ -53,48 +85,30 @@
   text-align: center;
 }
 
-.duration-rate {
-  font-size: 1.2rem;
+.rate-value {
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--pool-blue);
   background: var(--bg-cream);
-  border: 2px solid var(--ink-black);
-  padding: var(--space-xs) var(--space-md);
-  box-shadow: 2px 2px 0px #000;
-  display: inline-block;
-}
-
-.duration-counter {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-top: var(--space-sm);
-  background: var(--card-white);
   border: var(--border-thick) solid var(--ink-black);
+  padding: var(--space-xs) var(--space-md);
   box-shadow: var(--shadow-brutal-sm);
-  padding: var(--space-xs);
+  display: inline-block;
+  transform: rotate(-1.5deg);
+  margin-bottom: var(--space-sm);
 }
 
-.counter-btn {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  padding: 0;
-}
-
-.duration-value {
-  font-size: 1.2rem;
-  font-weight: 700;
-  min-width: 100px;
+.rate-subtext {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
 .duration-note {
   font-family: var(--font-mono);
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
+
 
 /* ── Booking Summary ── */
 .slot-booking__summary {
