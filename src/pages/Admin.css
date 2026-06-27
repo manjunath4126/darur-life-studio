@@ -95,6 +95,24 @@
   border-width: 2px !important;
 }
 
+/* Admin Login Page */
+.admin-login-page {
+  min-height: 100vh;
+  background-color: var(--bg-cream);
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-4xl) var(--space-md);
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 450px;
+  background-color: var(--card-white);
+  z-index: 10;
+  position: relative;
+}
+
+
 /* Inquiry Cards Grid */
 .inquiry-grid {
   display: grid;

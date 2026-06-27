@@ -6,6 +6,14 @@ import './Admin.css';
 export default function Admin() {
   const [activeTab, setActiveTab] = useState('bookings'); // 'bookings' | 'orders' | 'inquiries' | 'settings'
 
+  // Admin Login State (persists on device)
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
+    return localStorage.getItem('darur_admin_logged') === 'true';
+  });
+  const [loginUsername, setLoginUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+
   // 1. Bookings State (Load from localStorage or defaults)
   const [bookings, setBookings] = useState(() => {
     const stored = localStorage.getItem('darur_bookings');
@@ -30,7 +38,7 @@ export default function Admin() {
     { id: 'inq-2', date: '2026-06-24', name: 'Vijay Kumar', phone: '90001 20002', email: 'vijay@gmail.com', message: 'Is the pool open on Sundays? Do you offer swimming coaching for kids?', type: 'Swimming' }
   ]);
 
-  // 4. Products Inventory Settings (which connects to Shop page prices!)
+  // 4. Products Inventory Settings
   const [inventory, setInventory] = useState(() => {
     const stored = localStorage.getItem('darur_inventory');
     if (stored) {
@@ -60,6 +68,28 @@ export default function Admin() {
       inquiriesCount: inquiries.length
     };
   }, [bookings, orders, inquiries]);
+
+  // Handle Admin Log In
+  const handleAdminLogin = (e) => {
+    e.preventDefault();
+    setLoginError('');
+
+    if (loginUsername === 'admin' && loginPassword === 'daruradmin123') {
+      localStorage.setItem('darur_admin_logged', 'true');
+      setIsAdminLoggedIn(true);
+      setLoginUsername('');
+      setLoginPassword('');
+    } else {
+      setLoginError('INVALID ADMIN CREDENTIALS!');
+    }
+  };
+
+  // Handle Admin Log Out
+  const handleAdminLogout = () => {
+    localStorage.removeItem('darur_admin_logged');
+    setIsAdminLoggedIn(false);
+  };
+
 
   // Update Booking Status
   const toggleBookingStatus = (id) => {
@@ -96,6 +126,73 @@ export default function Admin() {
     setNewPrice('');
   };
 
+  if (!isAdminLoggedIn) {
+    return (
+      <div className="page-wrapper admin-login-page flex-center bg-cream">
+        {/* Decorative elements */}
+        <div className="decor-dot dot-1 bg-blue"></div>
+        <div className="decor-dot dot-2 bg-green"></div>
+        <div className="decor-dot dot-3 bg-coral"></div>
+        <div className="decor-dot dot-4 bg-yellow"></div>
+
+        <motion.div
+          className="brutal-card admin-login-card"
+          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="text-center mb-lg">
+            <span className="section-label" style={{ background: 'var(--sunny-yellow)' }}>
+              // SECURE ACCESS
+            </span>
+            <h2 className="text-mono mt-xs">ADMIN GATEWAY</h2>
+            <p className="text-sm text-secondary">Authorized personnel only</p>
+          </div>
+
+          {loginError && (
+            <div className="auth-error-banner text-mono mb-md text-center">
+              ⚠ {loginError}
+            </div>
+          )}
+
+          <form onSubmit={handleAdminLogin} className="auth-form">
+            <div className="form-group mb-md">
+              <label htmlFor="username">ADMIN USERNAME</label>
+              <input
+                type="text"
+                id="username"
+                value={loginUsername}
+                onChange={(e) => setLoginUsername(e.target.value)}
+                className="brutal-input"
+                placeholder="admin"
+                required
+              />
+            </div>
+            <div className="form-group mb-lg">
+              <label htmlFor="adminPassword">ADMIN PASSWORD</label>
+              <input
+                type="password"
+                id="adminPassword"
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                className="brutal-input"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <button type="submit" className="brutal-btn brutal-btn--primary w-full">
+              SECURE LOGIN
+            </button>
+          </form>
+          
+          <div className="text-center mt-md">
+            <p className="text-xs text-mono text-muted">Hint: admin / daruradmin123</p>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
   return (
     <div className="page-wrapper admin-page">
       {/* Hero Banner */}
@@ -107,8 +204,17 @@ export default function Admin() {
               <h1 className="admin-title">STUDIO COMMAND</h1>
               <p className="text-mono">Authorized Access • Live Data Monitor</p>
             </div>
-            <div className="admin-status-badge text-mono bg-yellow">
-              🟢 ONLINE - MULTI-DEVICE MODE
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}>
+              <div className="admin-status-badge text-mono bg-yellow">
+                🟢 ONLINE - MULTI-DEVICE
+              </div>
+              <button 
+                onClick={handleAdminLogout}
+                className="brutal-btn brutal-btn--sm brutal-btn--ghost"
+                style={{ padding: '6px 12px', minHeight: 'unset' }}
+              >
+                LOG OUT
+              </button>
             </div>
           </div>
         </div>
