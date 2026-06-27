@@ -17,124 +17,83 @@
   margin-bottom: var(--space-2xl);
 }
 
-/* ── Period Label ── */
-.slot-booking__period {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-lg);
+/* ── Selection Grid ── */
+.slot-booking__selection-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-xl);
   margin-top: var(--space-xl);
 }
 
-.slot-booking__period-label {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--text-muted);
+.slot-booking__box {
+  background: var(--card-white);
+  padding: var(--space-xl) !important;
 }
 
-.slot-booking__period-line {
-  flex: 1;
-  height: 3px;
-  background: var(--border-color);
-}
-
-/* ── Slots Grid ── */
-.slot-booking__slots-grid {
+/* ── Start Times Selector ── */
+.start-times-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: var(--space-md);
 }
 
-/* ── Individual Slot Card ── */
-.slot-card {
-  background: var(--card-white);
-  border: var(--border-thick) solid var(--border-color);
-  box-shadow: var(--shadow-brutal-sm);
-  padding: var(--space-lg);
+.start-time-btn {
+  text-align: center;
+  width: 100%;
+  font-family: var(--font-mono) !important;
+  font-size: 0.9rem !important;
+}
+
+/* ── Duration Selector ── */
+.duration-box {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
-  transition: transform var(--transition-bounce),
-              box-shadow var(--transition-bounce),
-              background var(--transition-fast),
-              border-color var(--transition-fast);
-  cursor: pointer;
-  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.slot-card:hover:not(.slot-card--full) {
-  transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-brutal);
-}
-
-.slot-card:active:not(.slot-card--full) {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px #000;
-}
-
-/* Available slot - blue left accent */
-.slot-card--available {
-  border-left: 6px solid var(--electric-blue);
-}
-
-/* Selected slot - yellow bg */
-.slot-card--selected {
-  background: var(--sunny-yellow);
-  border-color: var(--ink-black);
-  border-width: var(--border-thick);
-  box-shadow: var(--shadow-brutal);
-  transform: translate(-2px, -2px);
-}
-
-.slot-card--selected:hover {
-  background: var(--yellow-hover);
-}
-
-/* Full slot - greyed out */
-.slot-card--full {
-  background: #e9e9e9;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.slot-card__time {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
+.duration-rate {
+  font-size: 1.2rem;
   font-weight: 700;
-  text-transform: uppercase;
+  color: var(--pool-blue);
+  background: var(--bg-cream);
+  border: 2px solid var(--ink-black);
+  padding: var(--space-xs) var(--space-md);
+  box-shadow: 2px 2px 0px #000;
+  display: inline-block;
 }
 
-.slot-card--full .slot-card__time {
-  text-decoration: line-through;
-  color: var(--text-muted);
-}
-
-.slot-card__spots {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text-muted);
-}
-
-.slot-card--full .slot-card__spots {
-  color: var(--vibrant-coral);
-}
-
-.slot-card--selected .slot-card__spots {
-  color: var(--ink-black);
-}
-
-.slot-card__book-btn {
+.duration-counter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
   margin-top: var(--space-sm);
-  align-self: flex-start;
+  background: var(--card-white);
+  border: var(--border-thick) solid var(--ink-black);
+  box-shadow: var(--shadow-brutal-sm);
+  padding: var(--space-xs);
 }
 
-.slot-card--full .slot-card__book-btn {
-  opacity: 0.4;
-  pointer-events: none;
+.counter-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+.duration-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  min-width: 100px;
+}
+
+.duration-note {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
 }
 
 /* ── Booking Summary ── */
@@ -154,21 +113,22 @@
 .slot-booking__summary-details {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 
 .slot-booking__summary-title {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  color: var(--vibrant-coral);
 }
 
 .slot-booking__summary-row {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-xl);
   flex-wrap: wrap;
 }
 
@@ -176,6 +136,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-xs);
+  font-family: var(--font-body);
 }
 
 .slot-booking__summary-label {
@@ -189,15 +150,21 @@
 
 .slot-booking__summary-value {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 700;
+}
+
+.slot-booking__action-area {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
 }
 
 .slot-booking__summary-price {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  color: var(--deep-blue);
+  color: var(--ink-black);
   white-space: nowrap;
 }
 
@@ -211,24 +178,50 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 768px) {
-  .slot-booking__slots-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 992px) {
+  .slot-booking__selection-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
 
+  .start-times-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
   .slot-booking__summary {
     flex-direction: column;
     align-items: stretch;
     text-align: center;
+    padding: var(--space-lg);
   }
 
   .slot-booking__summary-row {
     justify-content: center;
+    gap: var(--space-md);
+  }
+
+  .slot-booking__action-area {
+    flex-direction: column;
+    margin-top: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .slot-booking__summary-price {
+    font-size: 1.8rem;
   }
 }
 
-@media (max-width: 480px) {
-  .slot-booking__slots-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 576px) {
+  .start-times-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
+
+@media (max-width: 400px) {
+  .start-times-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+

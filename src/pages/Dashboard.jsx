@@ -10,26 +10,37 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('bookings'); // 'bookings' | 'orders' | 'membership'
 
-  const sampleBookings = [
-    {
-      id: 'b-1',
-      date: '2026-06-28',
-      time: '07:00 - 08:00 AM',
-      type: 'Swimming Slot',
-      status: 'CONFIRMED',
-      price: '₹200',
-      badgeColor: 'var(--neon-green)'
-    },
-    {
-      id: 'b-2',
-      date: '2026-06-25',
-      time: '06:00 - 07:00 AM',
-      type: 'Swimming Slot',
-      status: 'COMPLETED',
-      price: '₹200',
-      badgeColor: 'var(--electric-blue)'
+  // Load bookings dynamically from localStorage, fallback to static defaults
+  const bookings = React.useMemo(() => {
+    const stored = localStorage.getItem('darur_bookings');
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch (e) {
+        // ignore
+      }
     }
-  ];
+    return [
+      {
+        id: 'b-1',
+        date: '2026-06-28',
+        time: '07:00 AM (1 Hour)',
+        type: 'Swimming Booking',
+        status: 'CONFIRMED',
+        price: '₹150',
+        badgeColor: 'var(--neon-green)'
+      },
+      {
+        id: 'b-2',
+        date: '2026-06-25',
+        time: '06:00 AM (1 Hour)',
+        type: 'Swimming Booking',
+        status: 'COMPLETED',
+        price: '₹150',
+        badgeColor: 'var(--electric-blue)'
+      }
+    ];
+  }, []);
 
   const sampleOrders = [
     {
@@ -41,6 +52,7 @@ export default function Dashboard() {
       badgeColor: 'var(--neon-green)'
     }
   ];
+
 
   const sampleMembership = {
     plan: 'PRO MEMBERSHIP',
@@ -129,7 +141,7 @@ export default function Dashboard() {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <h2 className="text-mono mb-lg">SWIMMING LANE BOOKINGS</h2>
-                {sampleBookings.length === 0 ? (
+                {bookings.length === 0 ? (
                   <div className="brutal-card text-center py-xl">
                     <p className="text-mono mb-md">NO UPCOMING OR PAST BOOKINGS FOUND</p>
                     <Link to="/swimming" className="brutal-btn brutal-btn--blue">
@@ -138,7 +150,7 @@ export default function Dashboard() {
                   </div>
                 ) : (
                   <div className="dashboard-list">
-                    {sampleBookings.map((b) => (
+                    {bookings.map((b) => (
                       <div key={b.id} className="brutal-card dashboard-item-card">
                         <div className="item-main">
                           <span 

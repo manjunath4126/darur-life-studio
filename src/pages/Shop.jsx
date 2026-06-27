@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LuShoppingCart, LuPlus, LuMinus, LuTrash2, LuX, LuEye } from 'react-icons/lu';
 import { useCart } from '../context/CartContext.jsx';
@@ -10,91 +10,107 @@ export default function Shop() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeQuickViewProduct, setActiveQuickViewProduct] = useState(null);
 
-  const products = [
-    // Swimming Category
-    {
-      id: 'swim-1',
-      name: 'PRO SWIM CAP',
-      price: 299,
-      category: 'SWIMMING',
-      color: 'var(--electric-blue)',
-      description: 'Hypoallergenic 100% silicone swim cap. Extremely durable and offers a snug, hydrodynamic fit.',
-      imageText: '🏊 CAP'
-    },
-    {
-      id: 'swim-2',
-      name: 'ANTI-FOG GOGGLES',
-      price: 599,
-      category: 'SWIMMING',
-      color: 'var(--pool-blue)',
-      description: 'UV protection, wide-view anti-fog swimming goggles. Leak-proof design with adjustable strap.',
-      imageText: '🥽 GOGGLES'
-    },
-    {
-      id: 'swim-3',
-      name: 'SWIM TRUNKS (MEN)',
-      price: 1499,
-      category: 'SWIMMING',
-      color: 'var(--deep-blue)',
-      description: 'Fast-drying swim trunks for professional training. Chlorine-resistant fabric with drawstring.',
-      imageText: '🩳 SHORTS'
-    },
-    {
-      id: 'swim-4',
-      name: 'ONE-PIECE SUIT (WOMEN)',
-      price: 1699,
-      category: 'SWIMMING',
-      color: 'var(--chlorine-green)',
-      description: 'Atheletic swimsuit designed for maximum flexibility and minimal drag. UPF 50+ protection.',
-      imageText: '🩱 SWIMSUIT'
-    },
-    {
-      id: 'swim-5',
-      name: 'SILICONE EAR PLUGS',
-      price: 199,
-      category: 'SWIMMING',
-      color: 'var(--neon-green)',
-      description: 'Ergonomically shaped soft silicone ear plugs. Blocks water, comfortable to wear.',
-      imageText: '👂 PLUGS'
-    },
-    {
-      id: 'swim-6',
-      name: 'MICROFIBER TOWEL',
-      price: 499,
-      category: 'SWIMMING',
-      color: 'var(--vibrant-coral)',
-      description: 'Ultra-absorbent, compact, and quick-drying microfiber towel. Ideal for swimmers.',
-      imageText: '🧣 TOWEL'
-    },
-    // Gym Category
-    {
-      id: 'gym-1',
-      name: 'LEATHER GYM GLOVES',
-      price: 399,
-      category: 'GYM',
-      color: 'var(--coral-orange)',
-      description: 'Premium leather gym gloves with wrist wraps support. Padded palms for blister prevention.',
-      imageText: '🧤 GLOVES'
-    },
-    {
-      id: 'gym-2',
-      name: 'BRUTAL SHAKER BOTTLE',
-      price: 349,
-      category: 'GYM',
-      color: 'var(--sunny-yellow)',
-      description: '700ml leak-proof protein shaker bottle. Equipped with a stainless steel whisk ball.',
-      imageText: '🍼 SHAKER'
-    },
-    {
-      id: 'gym-3',
-      name: 'RESISTANCE BAND SET',
-      price: 599,
-      category: 'GYM',
-      color: 'var(--electric-blue)',
-      description: 'Set of 3 heavy-duty latex bands for stretching, yoga, and strength workouts.',
-      imageText: '🎗️ BANDS'
-    }
-  ];
+  const products = useMemo(() => {
+    // Get dynamic price from localStorage or default
+    const getDynamicPrice = (id, defaultPrice) => {
+      const stored = localStorage.getItem('darur_inventory');
+      if (stored) {
+        try {
+          const items = JSON.parse(stored);
+          const match = items.find(item => item.id === id);
+          if (match) return match.price;
+        } catch (e) {}
+      }
+      return defaultPrice;
+    };
+
+    return [
+      // Swimming Category
+      {
+        id: 'swim-1',
+        name: 'PRO SWIM CAP',
+        price: getDynamicPrice('swim-1', 299),
+        category: 'SWIMMING',
+        color: 'var(--electric-blue)',
+        description: 'Hypoallergenic 100% silicone swim cap. Extremely durable and offers a snug, hydrodynamic fit.',
+        imageText: '🏊 CAP'
+      },
+      {
+        id: 'swim-2',
+        name: 'ANTI-FOG GOGGLES',
+        price: getDynamicPrice('swim-2', 599),
+        category: 'SWIMMING',
+        color: 'var(--pool-blue)',
+        description: 'UV protection, wide-view anti-fog swimming goggles. Leak-proof design with adjustable strap.',
+        imageText: '🥽 GOGGLES'
+      },
+      {
+        id: 'swim-3',
+        name: 'SWIM TRUNKS (MEN)',
+        price: getDynamicPrice('swim-3', 1499),
+        category: 'SWIMMING',
+        color: 'var(--deep-blue)',
+        description: 'Fast-drying swim trunks for professional training. Chlorine-resistant fabric with drawstring.',
+        imageText: '🩳 SHORTS'
+      },
+      {
+        id: 'swim-4',
+        name: 'ONE-PIECE SUIT (WOMEN)',
+        price: getDynamicPrice('swim-4', 1699),
+        category: 'SWIMMING',
+        color: 'var(--chlorine-green)',
+        description: 'Atheletic swimsuit designed for maximum flexibility and minimal drag. UPF 50+ protection.',
+        imageText: '🩱 SWIMSUIT'
+      },
+      {
+        id: 'swim-5',
+        name: 'SILICONE EAR PLUGS',
+        price: getDynamicPrice('swim-5', 199),
+        category: 'SWIMMING',
+        color: 'var(--neon-green)',
+        description: 'Ergonomically shaped soft silicone ear plugs. Blocks water, comfortable to wear.',
+        imageText: '👂 PLUGS'
+      },
+      {
+        id: 'swim-6',
+        name: 'MICROFIBER TOWEL',
+        price: getDynamicPrice('swim-6', 499),
+        category: 'SWIMMING',
+        color: 'var(--vibrant-coral)',
+        description: 'Ultra-absorbent, compact, and quick-drying microfiber towel. Ideal for swimmers.',
+        imageText: '🧣 TOWEL'
+      },
+      // Gym Category
+      {
+        id: 'gym-1',
+        name: 'LEATHER GYM GLOVES',
+        price: getDynamicPrice('gym-1', 399),
+        category: 'GYM',
+        color: 'var(--coral-orange)',
+        description: 'Premium leather gym gloves with wrist wraps support. Padded palms for blister prevention.',
+        imageText: '🧤 GLOVES'
+      },
+      {
+        id: 'gym-2',
+        name: 'BRUTAL SHAKER BOTTLE',
+        price: getDynamicPrice('gym-2', 349),
+        category: 'GYM',
+        color: 'var(--sunny-yellow)',
+        description: '700ml leak-proof protein shaker bottle. Equipped with a stainless steel whisk ball.',
+        imageText: '🍼 SHAKER'
+      },
+      {
+        id: 'gym-3',
+        name: 'RESISTANCE BAND SET',
+        price: getDynamicPrice('gym-3', 599),
+        category: 'GYM',
+        color: 'var(--electric-blue)',
+        description: 'Set of 3 heavy-duty latex bands for stretching, yoga, and strength workouts.',
+        imageText: '🎗️ BANDS'
+      }
+    ];
+  }, []);
+
 
   const filteredProducts = categoryFilter === 'ALL' 
     ? products 

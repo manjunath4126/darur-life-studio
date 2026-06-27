@@ -1,53 +1,69 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LuCalendar, LuClock, LuWaves } from 'react-icons/lu';
+import { LuCalendar, LuClock, LuPlus, LuMinus, LuCheck } from 'react-icons/lu';
 import SlotCalendar from './SlotCalendar.jsx';
 import './SlotBooking.css';
 
-/* ── Fake slot data generator ── */
-function generateSlots(dateStr) {
-  const seed = dateStr.split('-').reduce((a, b) => a + parseInt(b, 10), 0);
-  const morningSlots = [
-    { id: `${dateStr}-m1`, time: '6:00 – 7:00 AM', period: 'morning' },
-    { id: `${dateStr}-m2`, time: '7:00 – 8:00 AM', period: 'morning' },
-    { id: `${dateStr}-m3`, time: '8:00 – 9:00 AM', period: 'morning' },
-  ];
-  const eveningSlots = [
-    { id: `${dateStr}-e1`, time: '5:00 – 6:00 PM', period: 'evening' },
-    { id: `${dateStr}-e2`, time: '6:00 – 7:00 PM', period: 'evening' },
-    { id: `${dateStr}-e3`, time: '7:00 – 8:00 PM', period: 'evening' },
-  ];
+const START_TIMES = [
+  '06:00 AM', '07:00 AM', '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM',
+  '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM'
+];
 
-  const allSlots = [...morningSlots, ...eveningSlots];
-  return allSlots.map((slot, i) => {
-    const pseudoRandom = ((seed * (i + 3) * 17) % 9);
-    const total = 8;
-    const booked = pseudoRandom;
-    const available = total - booked;
-    return {
-      ...slot,
-      spotsTotal: total,
-      spotsAvailable: available,
-      isFull: available <= 0,
-    };
-  });
-}
-
-const PRICE_PER_SESSION = 200;
+const PRICE_PER_HOUR = 150;
 
 export default function SlotBooking() {
   const todayStr = new Date().toISOString().split('T')[0];
   const [selectedDate, setSelectedDate] = useState(todayStr);
-  const [selectedSlotId, setSelectedSlotId] = useState(null);
+  const [startTime, setStartTime] = useState('');
+  const [duration, setDuration] = useState(1);
+  const [isBooked, setIsBooked] = useState(false);
 
-  const slots = useMemo(() => generateSlots(selectedDate), [selectedDate]);
-  const morningSlots = slots.filter(s => s.period === 'morning');
-  const eveningSlots = slots.filter(s => s.period === 'evening');
-  const selectedSlot = slots.find(s => s.id === selectedSlotId);
+  const totalPrice = useMemo(() => duration * PRICE_PER_HOUR, [duration]);
 
   const handleDateChange = (dateStr) => {
     setSelectedDate(dateStr);
-    setSelectedSlotId(null); // reset slot on date change
+    setIsBooked(false);
+  };
+
+  const handleTimeSelect = (time) => {
+    setStartTime(time);
+    setIsBooked(false);
+  };
+
+  const incrementDuration = () => {
+    if (duration < 5) setDuration(prev => prev + 1);
+  };
+
+  const decrementDuration = () => {
+    if (duration > 1) setDuration(prev => prev - 1);
+  };
+
+  const handleConfirmBooking = () => {
+    if (!startTime) return;
+
+    // Simulate saving the booking to localStorage for Dashboard page
+    const newBooking = {
+      id: `b-${Date.now()}`,
+      date: selectedDate,
+      time: `${startTime} (${duration} ${duration === 1 ? 'Hour' : 'Hours'})`,
+      type: 'Swimming Booking',
+      status: 'CONFIRMED',
+      price: `₹${totalPrice}`,
+      badgeColor: 'var(--neon-green)'
+    };
+
+    const existingBookingsStr = localStorage.getItem('darur_bookings');
+    const existingBookings = existingBookingsStr ? JSON.parse(existingBookingsStr) : [];
+    
+    // Put new booking at the top
+    localStorage.setItem('darur_bookings', JSON.stringify([newBooking, ...existingBookings]));
+
+    setIsBooked(true);
+    setTimeout(() => {
+      setIsBooked(false);
+      setStartTime('');
+      setDuration(1);
+    }, 2500);
   };
 
   const formatDisplayDate = (dateStr) => {
@@ -63,8 +79,8 @@ export default function SlotBooking() {
     <div className="slot-booking">
       {/* Header */}
       <div className="slot-booking__header">
-        <span className="section-label">// BOOK A SLOT</span>
-        <h2 className="slot-booking__heading section-title">RESERVE YOUR LANE</h2>
+        <span className="section-label">// BOOK A LANE</span>
+        <h2 className="slot-booking__heading section-title">SELECT TIMING &amp; DURATION</h2>
       </div>
 
       {/* Calendar strip */}
@@ -75,48 +91,73 @@ export default function SlotBooking() {
         />
       </div>
 
-      {/* Morning slots */}
-      <SlotPeriod label="Morning" icon={<LuClock />} />
-      <div className="slot-booking__slots-grid">
-        {morningSlots.map((slot, index) => (
-          <SlotCard
-            key={slot.id}
-            slot={slot}
-            isSelected={selectedSlotId === slot.id}
-            onSelect={() => !slot.isFull && setSelectedSlotId(slot.id)}
-            delay={index * 0.08}
-          />
-        ))}
-      </div>
+      <div className="slot-booking__selection-grid">
+        {/* Start Time Selector */}
+        <div className="slot-booking__box brutal-card">
+          <h3 className="text-mono mb-md flex items-center gap-xs">
+            <LuClock /> SELECT START TIME
+          </h3>
+          <div className="start-times-grid">
+            {START_TIMES.map((time) => (
+              <button
+                key={time}
+                onClick={() => handleTimeSelect(time)}
+                className={`brutal-btn brutal-btn--sm start-time-btn ${startTime === time ? 'brutal-btn--primary' : 'brutal-btn--ghost'}`}
+                type="button"
+              >
+                {time}
+              </button>
+            ))}
+          </div>
+        </div>
 
-      {/* Evening slots */}
-      <SlotPeriod label="Evening" icon={<LuWaves />} />
-      <div className="slot-booking__slots-grid">
-        {eveningSlots.map((slot, index) => (
-          <SlotCard
-            key={slot.id}
-            slot={slot}
-            isSelected={selectedSlotId === slot.id}
-            onSelect={() => !slot.isFull && setSelectedSlotId(slot.id)}
-            delay={index * 0.08 + 0.24}
-          />
-        ))}
+        {/* Duration Selector */}
+        <div className="slot-booking__box brutal-card duration-box">
+          <h3 className="text-mono mb-md">
+            ⌛ SELECT DURATION
+          </h3>
+          <p className="duration-rate text-mono mb-lg">RATE: ₹{PRICE_PER_HOUR} / hour</p>
+          
+          <div className="duration-counter">
+            <button
+              onClick={decrementDuration}
+              className="brutal-btn brutal-btn--sm brutal-btn--ghost counter-btn"
+              type="button"
+              disabled={duration <= 1}
+            >
+              <LuMinus />
+            </button>
+            <span className="duration-value text-mono">
+              {duration} {duration === 1 ? 'HOUR' : 'HOURS'}
+            </span>
+            <button
+              onClick={incrementDuration}
+              className="brutal-btn brutal-btn--sm brutal-btn--ghost counter-btn"
+              type="button"
+              disabled={duration >= 5}
+            >
+              <LuPlus />
+            </button>
+          </div>
+          
+          <p className="duration-note text-sm mt-md">Max 5 hours per booking session.</p>
+        </div>
       </div>
 
       {/* Booking Summary */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={selectedSlotId || 'empty'}
+          key={startTime || 'empty'}
           className="slot-booking__summary"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
         >
-          {selectedSlot ? (
+          {startTime ? (
             <>
               <div className="slot-booking__summary-details">
-                <span className="slot-booking__summary-title">Booking Summary</span>
+                <span className="slot-booking__summary-title">Booking Details</span>
                 <div className="slot-booking__summary-row">
                   <div className="slot-booking__summary-item">
                     <LuCalendar size={16} />
@@ -127,21 +168,33 @@ export default function SlotBooking() {
                   </div>
                   <div className="slot-booking__summary-item">
                     <LuClock size={16} />
-                    <span className="slot-booking__summary-label">Slot:</span>
-                    <span className="slot-booking__summary-value">{selectedSlot.time}</span>
+                    <span className="slot-booking__summary-label">Start Time:</span>
+                    <span className="slot-booking__summary-value">{startTime}</span>
+                  </div>
+                  <div className="slot-booking__summary-item">
+                    <span>⌛</span>
+                    <span className="slot-booking__summary-label">Duration:</span>
+                    <span className="slot-booking__summary-value">
+                      {duration} {duration === 1 ? 'Hour' : 'Hours'}
+                    </span>
                   </div>
                 </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xl)' }}>
-                <span className="slot-booking__summary-price">₹{PRICE_PER_SESSION}</span>
-                <button className="brutal-btn brutal-btn--primary brutal-btn--lg" type="button">
-                  CONFIRM &amp; PAY
+              <div className="slot-booking__action-area">
+                <span className="slot-booking__summary-price">₹{totalPrice}</span>
+                <button 
+                  onClick={handleConfirmBooking}
+                  className={`brutal-btn ${isBooked ? 'brutal-btn--green' : 'brutal-btn--primary'} brutal-btn--lg`} 
+                  type="button"
+                  disabled={isBooked}
+                >
+                  {isBooked ? <span className="flex items-center gap-xs"><LuCheck /> BOOKED!</span> : 'CONFIRM & PAY'}
                 </button>
               </div>
             </>
           ) : (
             <span className="slot-booking__summary-empty">
-              ← Select a date and time slot to proceed
+              ← Select a start time above to build your session
             </span>
           )}
         </motion.div>
@@ -150,57 +203,3 @@ export default function SlotBooking() {
   );
 }
 
-/* ── Slot Period Heading ── */
-function SlotPeriod({ label, icon }) {
-  return (
-    <div className="slot-booking__period">
-      <span className="slot-booking__period-label">
-        {icon} {label}
-      </span>
-      <span className="slot-booking__period-line" />
-    </div>
-  );
-}
-
-/* ── Individual Slot Card ── */
-function SlotCard({ slot, isSelected, onSelect, delay = 0 }) {
-  const stateClass = slot.isFull
-    ? 'slot-card--full'
-    : isSelected
-      ? 'slot-card--selected'
-      : 'slot-card--available';
-
-  return (
-    <motion.div
-      className={`slot-card ${stateClass}`}
-      onClick={onSelect}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay, duration: 0.3 }}
-      whileTap={!slot.isFull ? { scale: 0.97 } : {}}
-      role="button"
-      tabIndex={0}
-      aria-disabled={slot.isFull}
-      aria-pressed={isSelected}
-    >
-      <span className="slot-card__time">{slot.time}</span>
-      <span className="slot-card__spots">
-        {slot.isFull
-          ? 'FULL'
-          : `${slot.spotsAvailable}/${slot.spotsTotal} spots`
-        }
-      </span>
-      <button
-        className="brutal-btn brutal-btn--blue brutal-btn--sm slot-card__book-btn"
-        type="button"
-        disabled={slot.isFull}
-        onClick={(e) => {
-          e.stopPropagation();
-          onSelect();
-        }}
-      >
-        {slot.isFull ? 'FULL' : isSelected ? 'SELECTED ✓' : 'BOOK NOW'}
-      </button>
-    </motion.div>
-  );
-}

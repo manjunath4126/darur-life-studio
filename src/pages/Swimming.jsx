@@ -11,57 +11,73 @@ import SlotBooking from '../components/swimming/SlotBooking.jsx';
 import AccessoryCard from '../components/swimming/AccessoryCard.jsx';
 import './Swimming.css';
 
+import React from 'react';
+
+// Get dynamic price from localStorage or default
+const getDynamicPrice = (id, defaultPrice) => {
+  const stored = localStorage.getItem('darur_inventory');
+  if (stored) {
+    try {
+      const items = JSON.parse(stored);
+      const match = items.find(item => item.id === id);
+      if (match) return match.price;
+    } catch (e) {}
+  }
+  return defaultPrice;
+};
+
 /* ── Accessories Data ── */
 const ACCESSORIES = [
   {
-    id: 'acc-swim-cap',
-    name: 'Swim Cap',
-    price: 299,
+    id: 'swim-1',
+    name: 'PRO SWIM CAP',
+    price: getDynamicPrice('swim-1', 299),
     category: 'Headwear',
     color: 'var(--electric-blue)',
     icon: LuCircle,
   },
   {
-    id: 'acc-swim-goggles',
-    name: 'Swim Goggles',
-    price: 599,
+    id: 'swim-2',
+    name: 'ANTI-FOG GOGGLES',
+    price: getDynamicPrice('swim-2', 599),
     category: 'Eyewear',
     color: 'var(--pool-blue)',
     icon: LuEye,
   },
   {
-    id: 'acc-swimsuit-men',
-    name: 'Swim Suit (Men)',
-    price: 1499,
+    id: 'swim-3',
+    name: 'SWIM TRUNKS (MEN)',
+    price: getDynamicPrice('swim-3', 1499),
     category: 'Swimwear',
     color: 'var(--deep-blue)',
     icon: LuShirt,
   },
   {
-    id: 'acc-swimsuit-women',
-    name: 'Swim Suit (Women)',
-    price: 1699,
+    id: 'swim-4',
+    name: 'ONE-PIECE SUIT (WOMEN)',
+    price: getDynamicPrice('swim-4', 1699),
     category: 'Swimwear',
     color: 'var(--neon-green)',
     icon: LuShirt,
   },
   {
-    id: 'acc-ear-plugs',
-    name: 'Ear Plugs',
-    price: 199,
+    id: 'swim-5',
+    name: 'SILICONE EAR PLUGS',
+    price: getDynamicPrice('swim-5', 199),
     category: 'Accessories',
     color: 'var(--chlorine-green)',
     icon: LuHeadphones,
   },
   {
-    id: 'acc-swim-towel',
-    name: 'Swim Towel',
-    price: 499,
+    id: 'swim-6',
+    name: 'MICROFIBER TOWEL',
+    price: getDynamicPrice('swim-6', 499),
     category: 'Accessories',
     color: 'var(--vibrant-coral)',
     icon: LuRectangleHorizontal,
   },
 ];
+
 
 /* ── Page Variants ── */
 const fadeUp = {
