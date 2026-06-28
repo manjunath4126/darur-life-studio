@@ -7,34 +7,34 @@ const testimonials = [
   {
     text: 'Great staff, excellent facilities, and a motivating atmosphere throughout.',
     author: 'Google Review',
-    accent: 'blue',
+    accent: 'shallow',
   },
   {
     text: 'The trainers were helpful, and I gained confidence in the water quickly.',
     author: 'Google Review',
-    accent: 'green',
+    accent: 'teal',
   },
   {
     text: 'A very good place with nice music and clean environment.',
     author: 'Google Review',
-    accent: 'coral',
+    accent: 'surface',
   },
   {
     text: 'Fantastic crew, fabulous experience!',
     author: 'Manjunath M.',
-    accent: 'yellow',
+    accent: 'deep',
   },
 ];
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
     transition: {
       delay: 0.15 + i * 0.12,
-      duration: 0.5,
-      ease: 'easeOut',
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
     },
   }),
 };
@@ -56,7 +56,7 @@ export default function Testimonials() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4 }}
         >
-          // Testimonials
+          // TESTIMONIALS
         </motion.span>
 
         <motion.h2
@@ -71,7 +71,7 @@ export default function Testimonials() {
         <div className="testimonials__grid">
           {testimonials.map((t, i) => (
             <motion.div
-              className={`testimonial-card testimonial-card--${t.accent}`}
+              className={`testimonial-card testimonial-card--${t.accent} brutal-card`}
               key={i}
               variants={cardVariants}
               initial="hidden"
@@ -79,9 +79,7 @@ export default function Testimonials() {
               custom={i}
             >
               {/* Large quote mark */}
-              <div
-                className={`testimonial-card__quote-mark testimonial-card__quote-mark--${t.accent}`}
-              >
+              <div className="testimonial-card__quote-mark">
                 &ldquo;
               </div>
 
@@ -94,7 +92,7 @@ export default function Testimonials() {
                   <LuStar
                     key={j}
                     className="testimonial-card__star"
-                    fill="var(--sunny-yellow)"
+                    fill="var(--ocean-teal)"
                     strokeWidth={0}
                   />
                 ))}

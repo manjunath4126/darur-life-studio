@@ -1,37 +1,65 @@
+/* ── Gym Page Minimalist Ocean Style ── */
+.gym-page {
+  min-height: 100vh;
+}
+
 .gym-hero {
   padding: var(--space-4xl) 0 var(--space-2xl) 0;
   background-color: var(--bg-white);
-  border-bottom: var(--border-thick) solid var(--border-color);
+  border-bottom: 1px solid var(--border-light);
   position: relative;
+  background: linear-gradient(135deg, rgba(75, 199, 207, 0.08) 0%, rgba(0, 68, 131, 0.03) 100%);
 }
 
 .gym-title {
   text-transform: uppercase;
   margin-top: var(--space-sm);
   margin-bottom: var(--space-sm);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-}
-
-.gym-title .highlight-text {
-  background-color: var(--neon-green);
-  padding: 0 var(--space-sm);
-  border: var(--border-width) solid var(--border-color);
-  box-shadow: 4px 4px 0px var(--ink-black);
-  display: inline-block;
-  transform: rotate(-1.5deg);
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  color: var(--ocean-deep);
 }
 
 .gym-subtitle {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
   color: var(--text-secondary);
 }
 
+/* ── Launch Offer ── */
+.launch-card {
+  padding: var(--space-xl) var(--space-2xl);
+  background: var(--card-white);
+  transition: all var(--transition-normal);
+}
+
+.launch-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.launch-card__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2xl);
+}
+
+.launch-card__price-box {
+  background: var(--bg-cream);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  min-width: 250px;
+}
+
+.text-teal {
+  color: var(--ocean-teal);
+}
+
+/* ── Plan Cards ── */
 .plans-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-2xl);
-  align-items: stretch;
   margin-top: var(--space-2xl);
 }
 
@@ -41,90 +69,35 @@
   height: 100%;
 }
 
-.plan-card.popular {
-  transform: scale(1.03);
-  box-shadow: var(--shadow-brutal-lg);
-  z-index: 2;
-  border-width: var(--border-thick);
-}
-
-.plan-card.popular:hover {
-  transform: scale(1.03) translate(-2px, -2px);
-  box-shadow: 10px 10px 0px #000;
-}
-
-.popular-badge {
-  position: absolute;
-  top: -15px;
-  right: 20px;
-  background-color: var(--sunny-yellow);
-  color: var(--ink-black);
-  border: var(--border-width) solid var(--border-color);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 750;
-  padding: var(--space-xs) var(--space-sm);
-  box-shadow: 3px 3px 0 #000;
-  transform: rotate(4deg);
-}
-
 .plan-name {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   margin-bottom: var(--space-sm);
 }
 
-.plan-price {
-  font-family: var(--font-heading);
-  display: flex;
-  align-items: baseline;
-  margin-bottom: var(--space-sm);
-}
-
-.plan-price .currency {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.plan-price .amount {
-  font-size: 3.5rem;
-  font-weight: 700;
-}
-
-.plan-price .duration {
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin-left: var(--space-xs);
-}
-
-.plan-features {
+.pricing-features {
+  list-style: none;
+  width: 100%;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  margin-bottom: var(--space-xl);
-  flex-grow: 1;
 }
 
-.plan-features li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-sm);
+.pricing-features li {
+  font-family: var(--font-body);
   font-size: 0.95rem;
   color: var(--text-secondary);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border-light);
 }
 
-.feature-icon {
-  font-size: 1.2rem;
-  flex-shrink: 0;
-  margin-top: 2px;
+.pricing-features li:last-child {
+  border-bottom: none;
 }
 
-.plan-btn {
-  margin-top: auto;
-}
-
+/* ── Contact Info & Forms ── */
 .contact-info-block {
   padding-right: var(--space-xl);
 }
@@ -136,36 +109,15 @@
   padding: var(--space-md);
 }
 
-.info-icon {
-  width: 50px;
-  height: 50px;
-  border: var(--border-width) solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.info-icon.bg-blue {
-  background-color: var(--electric-blue);
-  color: var(--text-light);
-}
-
-.info-icon.bg-green {
-  background-color: var(--neon-green);
-  color: var(--ink-black);
-}
-
 .info-link {
   font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 700;
-  text-decoration: underline;
+  color: var(--ocean-deep);
 }
 
 .info-link:hover {
-  color: var(--electric-blue);
+  color: var(--ocean-teal);
 }
 
 .contact-whatsapp-btn {
@@ -180,33 +132,29 @@
 .form-group label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   margin-bottom: var(--space-xs);
-}
-
-.success-banner {
-  background-color: var(--neon-green);
-  border: var(--border-width) solid var(--border-color);
-  padding: var(--space-sm);
-  box-shadow: var(--shadow-brutal-sm);
+  color: var(--text-secondary);
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .plans-grid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    margin: var(--space-xl) auto 0 auto;
+  .launch-card__content {
+    flex-direction: column;
+    text-align: center;
     gap: var(--space-xl);
   }
 
-  .plan-card.popular {
-    transform: scale(1);
+  .launch-card__price-box {
+    width: 100%;
   }
-  
-  .plan-card.popular:hover {
-    transform: translate(-2px, -2px);
+}
+
+@media (max-width: 768px) {
+  .plans-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
   }
 
   .contact-info-block {

@@ -5,8 +5,8 @@
 
 .dashboard-banner {
   padding: var(--space-4xl) 0 var(--space-xl) 0;
-  border-bottom: var(--border-thick) solid var(--border-color);
-  background-color: var(--bg-cream);
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(135deg, rgba(144, 214, 226, 0.08) 0%, rgba(0, 68, 131, 0.03) 100%);
 }
 
 .banner-flex {
@@ -24,21 +24,24 @@
 }
 
 .user-avatar-brutal {
-  width: 70px;
-  height: 70px;
-  border: var(--border-thick) solid var(--border-color);
-  background-color: var(--sunny-yellow);
-  box-shadow: var(--shadow-brutal-sm);
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--border-light);
+  background-color: var(--ocean-shallow);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
+  color: var(--ocean-deep);
   flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .user-welcome {
   text-transform: uppercase;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  color: var(--ocean-deep);
 }
 
 .logout-btn {
@@ -46,8 +49,9 @@
 }
 
 .logout-btn:hover {
-  background-color: var(--vibrant-coral);
-  color: var(--text-light);
+  background-color: #FFF0F0;
+  color: var(--ocean-deep);
+  border-color: #FFAAAA;
 }
 
 .dashboard-tabs-row {
@@ -83,12 +87,14 @@
 
 .item-title {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   text-transform: uppercase;
+  color: var(--ocean-deep);
 }
 
 .item-val {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  color: var(--ocean-deep);
 }
 
 .membership-status-card {
@@ -99,7 +105,8 @@
 
 .membership-plan-title {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  color: var(--ocean-deep);
 }
 
 .status-grid {
@@ -114,23 +121,20 @@
 }
 
 .status-detail-item .label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .status-detail-item .val {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   margin-top: 2px;
+  color: var(--ocean-deep);
 }
 
 .max-w-sm {
   max-width: 450px;
-}
-
-.icon-large {
-  font-size: 4rem;
 }
 
 @media (max-width: 768px) {

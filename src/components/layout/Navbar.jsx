@@ -58,7 +58,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="navbar__logo">
             <span className="navbar__logo-accent" />
-            <span className="navbar__logo-text">Darur Life Studio</span>
+            <span className="navbar__logo-text">DARUR LIFE STUDIO &amp; HEALTH CLUB</span>
           </Link>
 
           {/* Desktop Nav Links */}
@@ -78,7 +78,7 @@ export default function Navbar() {
           {/* Right Actions */}
           <div className="navbar__actions">
             {/* Cart */}
-            <Link to="/cart" className="navbar__cart" aria-label="Shopping cart">
+            <Link to="/shop" className="navbar__cart" aria-label="Shopping cart">
               <LuShoppingCart />
               {totalItems > 0 && (
                 <motion.span
@@ -113,7 +113,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link
-                to="/login"
+                to="/auth"
                 className="brutal-btn brutal-btn--primary brutal-btn--sm navbar__auth-btn"
               >
                 Login
@@ -208,7 +208,7 @@ export default function Navbar() {
                 </>
               ) : (
                 <Link
-                  to="/login"
+                  to="/auth"
                   className="brutal-btn brutal-btn--primary"
                   onClick={() => setMobileOpen(false)}
                 >
@@ -216,7 +216,7 @@ export default function Navbar() {
                 </Link>
               )}
               <Link
-                to="/cart"
+                to="/shop"
                 className="brutal-btn brutal-btn--ghost"
                 onClick={() => setMobileOpen(false)}
               >

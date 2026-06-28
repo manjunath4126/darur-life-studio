@@ -70,16 +70,14 @@ export default function Auth() {
   };
 
   return (
-    <div className="page-wrapper auth-page flex-center">
-      {/* Decorative scattered dots/squares */}
-      <div className="decor-dot dot-1 bg-blue"></div>
-      <div className="decor-dot dot-2 bg-green"></div>
-      <div className="decor-dot dot-3 bg-coral"></div>
-      <div className="decor-dot dot-4 bg-yellow"></div>
+    <div className="page-wrapper auth-page flex-center bg-cream">
+      {/* Premium Ambient Background Glows */}
+      <div className="auth-ambient auth-ambient--1"></div>
+      <div className="auth-ambient auth-ambient--2"></div>
 
       <motion.div
         className="brutal-card auth-card"
-        initial={{ opacity: 0, scale: 0.95, y: 30 }}
+        initial={{ opacity: 0, scale: 0.98, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
@@ -115,7 +113,7 @@ export default function Auth() {
                 value={loginData.email}
                 onChange={handleLoginChange}
                 className="brutal-input"
-                placeholder="swim@darurlifestudio.com"
+                placeholder="member@darurlifestudio.com"
                 required
               />
             </div>
@@ -132,7 +130,7 @@ export default function Auth() {
                 required
               />
             </div>
-            <button type="submit" className="brutal-btn brutal-btn--blue w-full">
+            <button type="submit" className="brutal-btn brutal-btn--primary w-full">
               ENTER STUDIO
             </button>
           </form>
@@ -203,7 +201,7 @@ export default function Auth() {
                 required
               />
             </div>
-            <button type="submit" className="brutal-btn brutal-btn--coral w-full">
+            <button type="submit" className="brutal-btn brutal-btn--primary w-full">
               CREATE MEMBERSHIP
             </button>
           </form>

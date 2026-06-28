@@ -3,26 +3,26 @@ import { motion, useInView } from 'framer-motion';
 import './About.css';
 
 const stats = [
-  { number: '4+', label: 'Years', variant: 'blue' },
-  { number: '562+', label: 'Happy Members', variant: 'electric' },
-  { number: '4.8★', label: 'Google Rating', variant: 'green' },
+  { number: '4+', label: 'YEARS STRONG', variant: 'shallow' },
+  { number: '562+', label: 'ACTIVE MEMBERS', variant: 'teal' },
+  { number: '4.8★', label: 'GOOGLE RATING', variant: 'surface' },
 ];
 
 const cardVariants = {
-  hidden: { opacity: 0, x: 50 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i) => ({
     opacity: 1,
-    x: 0,
+    y: 0,
     transition: {
-      delay: 0.2 + i * 0.15,
-      duration: 0.5,
-      ease: 'easeOut',
+      delay: 0.2 + i * 0.12,
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
     },
   }),
 };
 
 const textVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 25 },
   visible: {
     opacity: 1,
     y: 0,
@@ -43,7 +43,7 @@ export default function About() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4 }}
         >
-          // About Us
+          // ABOUT US
         </motion.span>
 
         <div className="about__grid">
@@ -54,23 +54,15 @@ export default function About() {
             animate={isInView ? 'visible' : 'hidden'}
           >
             <h2 className="about__heading section-title">
-              Where Fitness Meets Fun
+              Where Fitness &amp; Well-being Meets Professional Care
             </h2>
             <p className="about__text">
-              <span className="about__highlight">Darur Life Studio</span> is
-              Anantapur's premier destination for swimming and fitness —
-              where passion meets purpose. Since{' '}
-              <span className="about__highlight">2022</span>, we've built a
-              community that believes fitness should be fun, accessible, and
-              transformative.
+              <span className="about__highlight">Darur Life Studio &amp; Health Club</span> is
+              Anantapur's premier premium destination for swimming, gym workouts, yoga, and clinical health services.
+              We believe in an integrated wellness philosophy that connects physical conditioning, expert coaching, and professional therapeutic care.
             </p>
             <p className="about__text">
-              Now celebrating our{' '}
-              <span className="about__highlight">4th Anniversary</span>, we
-              continue to push boundaries with professional coaches, modern
-              equipment, and a welcoming environment that makes every member
-              feel at home. From your first splash to your heaviest lift —
-              we're with you every step.
+              In collaboration with the renowned <span className="about__highlight">Kasturi College of Physiotherapy</span>, we offer on-site clinical rehabilitation, posture correction, and sports injury therapies. Whether you are learning to swim, hitting personal gym milestones, or recovering from injury, our holistic workspace supports you every day.
             </p>
           </motion.div>
 
@@ -78,7 +70,7 @@ export default function About() {
           <div className="about__stats">
             {stats.map((stat, i) => (
               <motion.div
-                className={`about__stat-card about__stat-card--${stat.variant}`}
+                className={`about__stat-card about__stat-card--${stat.variant} brutal-card`}
                 key={stat.label}
                 variants={cardVariants}
                 initial="hidden"

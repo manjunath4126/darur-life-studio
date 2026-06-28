@@ -32,11 +32,17 @@ export default function Admin() {
     { id: 'o-1091', date: '2026-06-23', items: 'Gym Gloves x1', total: '₹399', status: 'SHIPPED', user: 'Suresh V' }
   ]);
 
-  // 3. Mock Inquiries
-  const [inquiries, setInquiries] = useState([
-    { id: 'inq-1', date: '2026-06-25', name: 'Anjali Sharma', phone: '99887 76655', email: 'anjali@example.com', message: 'I want to know about personal training availability in the morning batch.', type: 'General' },
-    { id: 'inq-2', date: '2026-06-24', name: 'Vijay Kumar', phone: '90001 20002', email: 'vijay@gmail.com', message: 'Is the pool open on Sundays? Do you offer swimming coaching for kids?', type: 'Swimming' }
-  ]);
+  // 3. Mock Inquiries (Loads dynamic submissions from contact form)
+  const [inquiries, setInquiries] = useState(() => {
+    const stored = localStorage.getItem('darur_inquiries');
+    if (stored) {
+      try { return JSON.parse(stored); } catch (e) {}
+    }
+    return [
+      { id: 'inq-1', date: '2026-06-25', name: 'Anjali Sharma', phone: '99887 76655', email: 'anjali@example.com', message: 'I want to know about personal training availability in the morning batch.', type: 'General' },
+      { id: 'inq-2', date: '2026-06-24', name: 'Vijay Kumar', phone: '90001 20002', email: 'vijay@gmail.com', message: 'Is the pool open on Sundays? Do you offer swimming coaching for kids?', type: 'Swimming' }
+    ];
+  });
 
   // 4. Products Inventory Settings
   const [inventory, setInventory] = useState(() => {

@@ -1,27 +1,18 @@
-/* ══════════════════════════════════════
-   Testimonials Section — Darur Life Studio
-   ══════════════════════════════════════ */
+/* ============================================
+   Testimonials Section — Minimalist Ocean Style
+   ============================================ */
 
 .testimonials {
   background: var(--bg-cream);
   position: relative;
   overflow: hidden;
-}
-
-.testimonials::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--ink-black);
+  border-top: 1px solid var(--border-light);
 }
 
 .testimonials__heading {
   font-family: var(--font-heading);
   text-transform: uppercase;
-  margin-bottom: var(--space-3xl);
+  margin-bottom: var(--space-2xl);
   letter-spacing: -0.02em;
 }
 
@@ -33,69 +24,47 @@
 
 /* ── Testimonial Card ── */
 .testimonial-card {
-  background: var(--card-white);
-  border: var(--border-thick) solid var(--ink-black);
-  box-shadow: var(--shadow-brutal);
   padding: var(--space-xl) var(--space-2xl);
-  position: relative;
-  transition: transform var(--transition-bounce), box-shadow var(--transition-bounce);
+  background: var(--card-white);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
 }
 
-.testimonial-card:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0px #000000;
+/* Color accents — thin left border */
+.testimonial-card--shallow {
+  border-left: 4px solid var(--ocean-shallow);
 }
 
-/* Color accents — thick left border */
-.testimonial-card--blue {
-  border-left: 8px solid var(--electric-blue);
+.testimonial-card--teal {
+  border-left: 4px solid var(--ocean-teal);
 }
 
-.testimonial-card--green {
-  border-left: 8px solid var(--neon-green);
+.testimonial-card--surface {
+  border-left: 4px solid var(--ocean-surface);
 }
 
-.testimonial-card--coral {
-  border-left: 8px solid var(--vibrant-coral);
-}
-
-.testimonial-card--yellow {
-  border-left: 8px solid var(--sunny-yellow);
+.testimonial-card--deep {
+  border-left: 4px solid var(--ocean-deep);
 }
 
 /* ── Quote mark ── */
 .testimonial-card__quote-mark {
   font-family: var(--font-heading);
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 700;
   line-height: 1;
+  color: var(--ocean-shallow);
   margin-bottom: -0.5rem;
   user-select: none;
-}
-
-.testimonial-card__quote-mark--blue {
-  color: var(--electric-blue);
-}
-
-.testimonial-card__quote-mark--green {
-  color: var(--neon-green);
-}
-
-.testimonial-card__quote-mark--coral {
-  color: var(--vibrant-coral);
-}
-
-.testimonial-card__quote-mark--yellow {
-  color: var(--sunny-yellow);
 }
 
 /* ── Content ── */
 .testimonial-card__text {
   font-family: var(--font-body);
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
   font-style: italic;
 }
 
@@ -107,14 +76,13 @@
 }
 
 .testimonial-card__star {
-  color: var(--sunny-yellow);
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 /* ── Attribution ── */
 .testimonial-card__author {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -125,5 +93,6 @@
 @media (max-width: 768px) {
   .testimonials__grid {
     grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
 }

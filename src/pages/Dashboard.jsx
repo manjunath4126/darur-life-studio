@@ -28,7 +28,7 @@ export default function Dashboard() {
         type: 'Swimming Booking',
         status: 'CONFIRMED',
         price: '₹150',
-        badgeColor: 'var(--neon-green)'
+        badgeColor: 'var(--ocean-teal)'
       },
       {
         id: 'b-2',
@@ -37,7 +37,7 @@ export default function Dashboard() {
         type: 'Swimming Booking',
         status: 'COMPLETED',
         price: '₹150',
-        badgeColor: 'var(--electric-blue)'
+        badgeColor: 'var(--ocean-deep)'
       }
     ];
   }, []);
@@ -49,7 +49,7 @@ export default function Dashboard() {
       items: 'Anti-Fog Goggles x1, Pro Swim Cap x1',
       total: '₹1,059',
       status: 'DELIVERED',
-      badgeColor: 'var(--neon-green)'
+      badgeColor: 'var(--ocean-teal)'
     }
   ];
 
@@ -60,7 +60,7 @@ export default function Dashboard() {
     startDate: '2026-06-01',
     endDate: '2026-07-01',
     price: '₹2,500/month',
-    badgeColor: 'var(--neon-green)'
+    badgeColor: 'var(--ocean-teal)'
   };
 
   const handleLogout = () => {
@@ -72,7 +72,7 @@ export default function Dashboard() {
     return (
       <div className="page-wrapper dashboard-page flex-center bg-cream">
         <div className="brutal-card text-center max-w-sm">
-          <LuUser className="icon-large mb-md text-coral" />
+          <LuUser className="icon-large mb-md text-coral" style={{ color: 'var(--ocean-teal)', fontSize: '2.5rem' }} />
           <h2 className="text-mono mb-sm">ACCESS DENIED</h2>
           <p className="mb-lg">Please login or register to view your membership, bookings, and orders dashboard.</p>
           <Link to="/auth" className="brutal-btn brutal-btn--primary">
@@ -155,7 +155,7 @@ export default function Dashboard() {
                         <div className="item-main">
                           <span 
                             className="brutal-badge text-mono" 
-                            style={{ backgroundColor: b.badgeColor, color: b.badgeColor === 'var(--neon-green)' ? '#000' : '#fff' }}
+                            style={{ backgroundColor: b.badgeColor, color: '#fff' }}
                           >
                             {b.status}
                           </span>
@@ -192,7 +192,7 @@ export default function Dashboard() {
                         <div className="item-main">
                           <span 
                             className="brutal-badge text-mono" 
-                            style={{ backgroundColor: o.badgeColor }}
+                            style={{ backgroundColor: o.badgeColor, color: '#fff' }}
                           >
                             {o.status}
                           </span>
@@ -224,9 +224,9 @@ export default function Dashboard() {
                     </Link>
                   </div>
                 ) : (
-                  <div className="brutal-card membership-status-card" style={{ borderLeft: '10px solid var(--neon-green)' }}>
+                  <div className="brutal-card membership-status-card" style={{ borderLeft: '4px solid var(--ocean-teal)' }}>
                     <div className="status-header mb-md">
-                      <span className="brutal-badge brutal-badge--green text-mono">
+                      <span className="brutal-badge brutal-badge--green text-mono" style={{ backgroundColor: 'var(--ocean-teal)', color: '#fff' }}>
                         {sampleMembership.status}
                       </span>
                       <h3 className="membership-plan-title mt-xs">{sampleMembership.plan}</h3>

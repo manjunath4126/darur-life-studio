@@ -47,13 +47,13 @@ export default function Gallery() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Inside Darur Life Studio
+          Inside Darur Life Studio &amp; Health Club
         </motion.h2>
 
         <div className="gallery__grid">
           {items.map((item, i) => (
             <motion.div
-              className={`gallery__item gallery__item--${item.variant}`}
+              className={`gallery__item gallery__item--${item.variant} brutal-card`}
               key={item.variant}
               variants={itemVariants}
               initial="hidden"

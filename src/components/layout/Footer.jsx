@@ -38,13 +38,23 @@ export default function Footer() {
           <motion.div className="footer__col" variants={itemVariants}>
             <div className="footer__logo">
               <span className="footer__logo-accent" />
-              <span className="footer__logo-text">Darur Life Studio</span>
+              <span className="footer__logo-text">DARUR LIFE STUDIO</span>
             </div>
             <p className="footer__description">
-              Anantapur's premium swimming academy & gym. Building champions in
+              Anantapur's premium swimming academy, gym &amp; health club. Building champions in
               the pool and strength in the gym since 2022.
             </p>
-            <p className="footer__copyright">© 2022–2026 Darur Life Studio</p>
+            <div className="footer__collab mt-md">
+              <span className="brutal-badge brutal-badge--green text-mono" style={{ fontSize: '0.65rem' }}>
+                🤝 PHYSIOTHERAPY PARTNER
+              </span>
+              <p className="text-sm mt-xs text-muted" style={{ lineHeight: '1.4' }}>
+                Collaborating with <strong>Kasturi College of Physiotherapy</strong> (Ph: 080554-273747) to provide expert orthopedic and sports rehabilitation.
+              </p>
+            </div>
+            <p className="footer__copyright" style={{ marginTop: 'var(--space-md)' }}>
+              © 2022–2026 Darur Life Studio &amp; Health Club
+            </p>
           </motion.div>
 
           {/* Col 2 — Quick Links */}
@@ -70,8 +80,7 @@ export default function Footer() {
                   <LuMapPin />
                 </span>
                 <span className="footer__contact-text">
-                  Cognizant College, 80 Feet Rd, near Ayyappa Swamy Temple,
-                  Srinagar Colony, Anantapur, AP 515001
+                  Beside Cognizant College, 80 Feet Road, Srinagar Colony Extension, before Ayyappa Swamy Temple, Anantapur, AP - 515001.
                 </span>
               </div>
               <div className="footer__contact-item">
@@ -79,7 +88,8 @@ export default function Footer() {
                   <LuPhone />
                 </span>
                 <span className="footer__contact-text">
-                  <a href="tel:+919381625959">093816 25959</a>
+                  <a href="tel:+919381625959">93816 25959</a><br />
+                  <a href="tel:+917013173562">70131 73562</a>
                 </span>
               </div>
               <div className="footer__contact-item">
@@ -87,7 +97,8 @@ export default function Footer() {
                   <LuClock />
                 </span>
                 <span className="footer__contact-text">
-                  Mon – Sun: 6:00 AM – 9:00 PM
+                  Gym: Mon – Sat: 6:00 AM – 9:00 PM (Break 1:00 PM – 4:00 PM)<br />
+                  Pool: Mon – Sun: 6:00 AM – 9:00 PM
                 </span>
               </div>
             </div>
@@ -122,7 +133,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <motion.div className="footer__bottom" variants={itemVariants}>
           <p className="footer__bottom-text">
-            Made with <span>💪</span> in Anantapur
+            Made with <span>🌊</span> &amp; <span>💪</span> in Anantapur
           </p>
         </motion.div>
       </motion.div>

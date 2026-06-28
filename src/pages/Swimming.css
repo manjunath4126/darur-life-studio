@@ -1,4 +1,4 @@
-/* ── Swimming Page ── */
+/* ── Swimming Page Minimalist Ocean Style ── */
 .swimming-page {
   min-height: 100vh;
 }
@@ -8,28 +8,9 @@
   position: relative;
   padding: var(--space-4xl) 0 var(--space-3xl);
   text-align: center;
-  background: var(--bg-cream);
-  border-bottom: var(--border-thick) solid var(--border-color);
+  background: linear-gradient(135deg, rgba(144, 214, 226, 0.15) 0%, rgba(75, 199, 207, 0.05) 100%);
+  border-bottom: 1px solid var(--border-light);
   overflow: hidden;
-}
-
-.swimming-hero::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 60px;
-  transform: translateY(-50%);
-  background: linear-gradient(
-    90deg,
-    var(--electric-blue) 0%,
-    var(--pool-blue) 50%,
-    var(--deep-blue) 100%
-  );
-  border-top: var(--border-width) solid var(--border-color);
-  border-bottom: var(--border-width) solid var(--border-color);
-  z-index: 0;
 }
 
 .swimming-hero__content {
@@ -41,32 +22,29 @@
   font-family: var(--font-heading);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-black);
-  background: var(--bg-cream);
+  letter-spacing: 0.05em;
+  color: var(--ocean-deep);
   display: inline-block;
-  padding: var(--space-sm) var(--space-xl);
-  border: var(--border-thick) solid var(--border-color);
-  box-shadow: var(--shadow-brutal);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: var(--space-sm);
 }
 
 .swimming-hero__subtitle {
-  margin-top: var(--space-lg);
   font-family: var(--font-mono);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
   color: var(--text-secondary);
+  text-transform: uppercase;
 }
 
 /* ── Sections ── */
 .swimming-section {
-  padding: var(--space-4xl) 0;
+  padding: var(--space-3xl) 0;
 }
 
 .swimming-section--accessories {
   background: var(--bg-cream);
-  border-top: var(--border-thick) solid var(--border-color);
+  border-top: 1px solid var(--border-light);
 }
 
 .swimming-section__header {
@@ -77,6 +55,47 @@
   font-family: var(--font-heading);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+/* ── Pricing Cards ── */
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-xl);
+  height: 100%;
+}
+
+.pricing-card__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  color: var(--ocean-deep);
+}
+
+.pricing-features {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.pricing-features li {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pricing-features li:last-child {
+  border-bottom: none;
+}
+
+.pricing-card__price {
+  font-size: 2.2rem;
+  color: var(--ocean-deep);
 }
 
 /* ── Accessories Grid ── */
@@ -98,16 +117,12 @@
     padding: var(--space-3xl) 0 var(--space-2xl);
   }
 
-  .swimming-hero::before {
-    height: 45px;
-  }
-
   .swimming-hero__heading {
     font-size: clamp(1.5rem, 5vw, 2.5rem);
   }
 
   .swimming-hero__subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 }
 

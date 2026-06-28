@@ -1,10 +1,10 @@
-/* ── SlotBooking ── */
+/* ── SlotBooking Minimalist Ocean Style ── */
 .slot-booking {
-  padding: var(--space-2xl) 0;
+  padding: var(--space-xl) 0;
 }
 
 .slot-booking__header {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-xl);
 }
 
 .slot-booking__heading {
@@ -14,7 +14,7 @@
 }
 
 .slot-booking__calendar-wrap {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-xl);
 }
 
 /* ── Selection Grid ── */
@@ -51,7 +51,7 @@
 
 .time-input-group label {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-secondary);
 }
@@ -64,16 +64,23 @@
   padding: 0 var(--space-md) !important;
   display: flex;
   align-items: center;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  background: var(--bg-cream);
+  color: var(--ocean-deep);
 }
 
 .validation-error {
-  color: var(--vibrant-coral);
-  font-size: 0.85rem;
+  color: var(--ocean-deep);
+  font-size: 0.82rem;
   font-weight: 700;
-  background: #FFF0F0;
-  border: 2px solid var(--vibrant-coral);
+  background: #FFF5F5;
+  border: 1px solid #FFD1D1;
   padding: var(--space-sm);
-  box-shadow: 2px 2px 0px var(--vibrant-coral);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
 }
 
 /* ── Pool Rate Card ── */
@@ -88,19 +95,19 @@
 .rate-value {
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--pool-blue);
+  color: var(--ocean-deep);
   background: var(--bg-cream);
-  border: var(--border-thick) solid var(--ink-black);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
   padding: var(--space-xs) var(--space-md);
-  box-shadow: var(--shadow-brutal-sm);
+  box-shadow: var(--shadow-sm);
   display: inline-block;
-  transform: rotate(-1.5deg);
   margin-bottom: var(--space-sm);
 }
 
 .rate-subtext {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 
@@ -109,14 +116,14 @@
   color: var(--text-secondary);
 }
 
-
 /* ── Booking Summary ── */
 .slot-booking__summary {
-  margin-top: var(--space-2xl);
+  margin-top: var(--space-xl);
   background: var(--card-white);
-  border: var(--border-thick) solid var(--border-color);
-  box-shadow: var(--shadow-brutal-lg);
-  padding: var(--space-xl) var(--space-2xl);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-lg) var(--space-xl);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -132,11 +139,11 @@
 
 .slot-booking__summary-title {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--vibrant-coral);
+  color: var(--ocean-deep);
 }
 
 .slot-booking__summary-row {
@@ -155,7 +162,7 @@
 
 .slot-booking__summary-label {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -164,21 +171,22 @@
 
 .slot-booking__summary-value {
   font-family: var(--font-heading);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 700;
+  color: var(--ocean-deep);
 }
 
 .slot-booking__action-area {
   display: flex;
   align-items: center;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
 }
 
 .slot-booking__summary-price {
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: var(--ink-black);
+  color: var(--ocean-deep);
   white-space: nowrap;
 }
 
@@ -187,7 +195,7 @@
   width: 100%;
   padding: var(--space-lg);
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
 }
 
@@ -196,10 +204,6 @@
   .slot-booking__selection-grid {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
-  }
-
-  .start-times-grid {
-    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -226,16 +230,3 @@
     font-size: 1.8rem;
   }
 }
-
-@media (max-width: 576px) {
-  .start-times-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 400px) {
-  .start-times-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-

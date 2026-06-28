@@ -126,11 +126,11 @@ export default function Shop() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="section-label">// DRESSED TO WIN</span>
+            <span className="section-label">// GEAR &amp; ACCESSORIES</span>
             <h1 className="shop-title">
-              GEAR <span className="highlight-text">SHOP</span>
+              STUDIO SHOP
             </h1>
-            <p className="shop-subtitle">Everything you need for pool & gym.</p>
+            <p className="shop-subtitle">Premium equipment and accessories for pool &amp; gym.</p>
           </motion.div>
         </div>
       </section>
@@ -186,7 +186,7 @@ export default function Shop() {
                 </div>
 
                 <div className="product-details mt-md">
-                  <span className="brutal-badge brutal-badge--yellow text-mono mb-xs">
+                  <span className={`brutal-badge ${product.category === 'SWIMMING' ? 'brutal-badge--blue' : 'brutal-badge--coral'} text-mono mb-xs`}>
                     {product.category}
                   </span>
                   <h3 className="product-name">{product.name}</h3>

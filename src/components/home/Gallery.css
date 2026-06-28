@@ -1,6 +1,6 @@
-/* ══════════════════════════════════════
-   Gallery Section — Darur Life Studio
-   ══════════════════════════════════════ */
+/* ============================================
+   Gallery Section — Minimalist Ocean Style
+   ============================================ */
 
 .gallery {
   background: var(--bg-white);
@@ -10,7 +10,7 @@
 .gallery__heading {
   font-family: var(--font-heading);
   text-transform: uppercase;
-  margin-bottom: var(--space-3xl);
+  margin-bottom: var(--space-2xl);
   letter-spacing: -0.02em;
 }
 
@@ -49,106 +49,72 @@
 
 /* ── Gallery Item (Placeholder) ── */
 .gallery__item {
-  border: var(--border-thick) solid var(--ink-black);
-  box-shadow: var(--shadow-brutal);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   cursor: pointer;
-  transition: transform var(--transition-bounce), box-shadow var(--transition-bounce);
   overflow: hidden;
   position: relative;
 }
 
 .gallery__item:hover {
-  transform: scale(1.03) translate(-2px, -2px);
-  box-shadow: 8px 8px 0px #000000;
+  transform: scale(1.015);
   z-index: 2;
 }
 
 /* ── Color backgrounds ── */
 .gallery__item--pool {
-  background: var(--electric-blue);
+  background: var(--ocean-deep);
+  color: var(--text-light);
 }
 
 .gallery__item--gym {
-  background: var(--neon-green);
+  background: var(--ocean-teal);
+  color: var(--ocean-abyss);
 }
 
 .gallery__item--training {
-  background: var(--vibrant-coral);
+  background: var(--ocean-surface);
+  color: var(--text-light);
 }
 
 .gallery__item--members {
-  background: var(--deep-blue);
+  background: var(--ocean-abyss);
+  color: var(--text-light);
 }
 
 .gallery__item--facility {
-  background: var(--sunny-yellow);
+  background: var(--ocean-shallow);
+  color: var(--ocean-deep);
 }
 
 .gallery__item--events {
-  background: var(--chlorine-green);
+  background: var(--bg-cream);
+  color: var(--ocean-abyss);
 }
 
 /* ── Placeholder content ── */
 .gallery__icon {
-  font-size: 2rem;
-  opacity: 0.6;
-}
-
-.gallery__item--pool .gallery__icon,
-.gallery__item--training .gallery__icon,
-.gallery__item--members .gallery__icon,
-.gallery__item--events .gallery__icon {
-  color: var(--text-light);
-}
-
-.gallery__item--gym .gallery__icon,
-.gallery__item--facility .gallery__icon {
-  color: var(--ink-black);
+  font-size: 1.6rem;
+  opacity: 0.7;
 }
 
 .gallery__label {
   font-family: var(--font-heading);
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 1.3rem);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
-.gallery__item--pool .gallery__label,
-.gallery__item--training .gallery__label,
-.gallery__item--members .gallery__label,
-.gallery__item--events .gallery__label {
-  color: var(--text-light);
-}
-
-.gallery__item--gym .gallery__label,
-.gallery__item--facility .gallery__label {
-  color: var(--ink-black);
-}
-
 .gallery__sublabel {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  opacity: 0.7;
-}
-
-.gallery__item--pool .gallery__sublabel,
-.gallery__item--training .gallery__sublabel,
-.gallery__item--members .gallery__sublabel,
-.gallery__item--events .gallery__sublabel {
-  color: var(--text-light);
-}
-
-.gallery__item--gym .gallery__sublabel,
-.gallery__item--facility .gallery__sublabel {
-  color: var(--ink-black);
+  opacity: 0.65;
 }
 
 /* ── Responsive ── */
