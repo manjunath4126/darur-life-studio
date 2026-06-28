@@ -5,6 +5,24 @@
 .facilities {
   background: var(--bg-white);
   position: relative;
+  overflow: hidden;
+  padding: var(--space-4xl) 0;
+}
+
+/* Background Parallax Typography */
+.facilities__bg-typography {
+  position: absolute;
+  top: 15%;
+  right: -5%;
+  font-family: var(--font-heading);
+  font-size: 16rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(75, 199, 207, 0.04);
+  letter-spacing: 0.15em;
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
 }
 
 .facilities__heading {
@@ -12,12 +30,21 @@
   text-transform: uppercase;
   margin-bottom: var(--space-2xl);
   letter-spacing: -0.02em;
+  position: relative;
+  z-index: 2;
+}
+
+.facilities__char {
+  display: inline-block;
+  will-change: transform, opacity;
 }
 
 .facilities__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-xl);
+  position: relative;
+  z-index: 2;
 }
 
 /* ── Facility Card ── */
@@ -27,6 +54,35 @@
   align-items: flex-start;
   padding: var(--space-xl);
   height: 100%;
+  position: relative;
+  background: var(--card-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-slow);
+  overflow: hidden;
+}
+
+.facilities__card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(120px circle at 50% 10%, rgba(75, 199, 207, 0.05), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+}
+
+.facilities__card:hover .facilities__card-glow {
+  opacity: 1;
+}
+
+.facilities__card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--ocean-teal);
 }
 
 /* Badge Sticker */
@@ -69,10 +125,108 @@
   color: var(--ocean-deep);
 }
 
+/* ── SVG Path Keyframe Animations ── */
+.facilities__icon svg {
+  transition: transform var(--transition-normal);
+}
+
+/* 1. Swim waves morph / bob */
+@keyframes wave-swim {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-3px) scaleY(0.85);
+  }
+}
+.facilities__card--swim:hover .facilities__icon svg {
+  animation: wave-swim 1.2s ease-in-out infinite;
+}
+
+/* 2. Gym dumbbell lift */
+@keyframes lift-gym {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(-15deg);
+  }
+}
+.facilities__card--gym:hover .facilities__icon svg {
+  animation: lift-gym 1s ease-in-out infinite;
+}
+
+/* 3. Studios sparkles spin */
+@keyframes spin-sparkles {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.15);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+.facilities__card--studios:hover .facilities__icon svg {
+  animation: spin-sparkles 1.8s linear infinite;
+}
+
+/* 4. Physio activity line pulse drawing */
+@keyframes pulse-physio {
+  0% {
+    stroke-dashoffset: 40;
+    opacity: 0.7;
+  }
+  50% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -40;
+    opacity: 0.7;
+  }
+}
+.facilities__card--physio:hover .facilities__icon svg path {
+  stroke-dasharray: 20;
+  animation: pulse-physio 1.4s linear infinite;
+}
+
+/* 5. Cafe cup steam bob */
+@keyframes tilt-cafe {
+  0%, 100% {
+    transform: rotate(0) translateY(0);
+  }
+  50% {
+    transform: rotate(-10deg) translateY(-2px);
+  }
+}
+.facilities__card--cafe:hover .facilities__icon svg {
+  animation: tilt-cafe 1.4s ease-in-out infinite;
+}
+
+/* 6. Workspace wifi flashing bands */
+@keyframes wifi-flash {
+  0%, 100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+    color: var(--ocean-deep);
+  }
+}
+.facilities__card--workspace:hover .facilities__icon svg path {
+  animation: wifi-flash 0.8s ease-in-out infinite;
+}
+.facilities__card--workspace:hover .facilities__icon svg path:nth-child(1) { animation-delay: 0s; }
+.facilities__card--workspace:hover .facilities__icon svg path:nth-child(2) { animation-delay: 0.15s; }
+.facilities__card--workspace:hover .facilities__icon svg path:nth-child(3) { animation-delay: 0.3s; }
+.facilities__card--workspace:hover .facilities__icon svg path:nth-child(4) { animation-delay: 0.45s; }
+
 /* Card Title */
 .facilities__card-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
   font-weight: 700;
   color: var(--ocean-deep);
   margin-bottom: var(--space-md);
@@ -94,6 +248,11 @@
   font-size: 0.88rem;
   color: var(--text-secondary);
   border-bottom: 1px solid var(--bg-cream);
+  transition: padding var(--transition-normal);
+}
+
+.facilities__card:hover .facilities__feature {
+  padding-left: 4px;
 }
 
 .facilities__feature:last-child {
@@ -105,6 +264,11 @@
   font-size: 0.95rem;
   color: var(--ocean-teal);
   margin-top: 2px;
+  transition: transform var(--transition-normal);
+}
+
+.facilities__card:hover .facilities__check {
+  transform: scale(1.2);
 }
 
 /* Card CTA */
@@ -117,6 +281,9 @@
 @media (max-width: 992px) {
   .facilities__grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .facilities__bg-typography {
+    display: none;
   }
 }
 

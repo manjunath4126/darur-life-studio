@@ -1,8 +1,13 @@
-import { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { LuWaves, LuDumbbell, LuCheck, LuSparkles, LuActivity, LuCoffee, LuWifi } from 'react-icons/lu';
 import './Facilities.css';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 const facilities = [
   {
@@ -52,7 +57,7 @@ const facilities = [
     title: 'Physiotherapy & Rehab',
     icon: LuActivity,
     badge: 'Kasturi College Partner',
-    link: '/gym', // direct to gym page contact info
+    link: '/gym',
     cta: 'Book Rehabilitation',
     features: [
       'Sports Injury Recovery',
@@ -91,62 +96,95 @@ const facilities = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.1 + i * 0.1,
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  }),
-};
-
 export default function Facilities() {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
+  const containerRef = useRef(null);
+  const headingText = "Our Facilities & Services";
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. Kinetic Typography character reveal on scroll
+      gsap.fromTo(
+        '.facilities__char',
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.03,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: '.facilities__heading',
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
+      // 2. Parallax card slide-up reveals
+      gsap.fromTo(
+        '.facilities__card',
+        { y: 100, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: '.facilities__grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
+      // 3. Background typography scroll parallax drift
+      gsap.to('.facilities__bg-typography', {
+        x: '-=150',
+        scrollTrigger: {
+          trigger: '#facilities',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="facilities section" id="facilities" ref={sectionRef}>
-      <div className="container">
-        <motion.span
-          className="section-label"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4 }}
-        >
-          // WHAT WE OFFER
-        </motion.span>
+    <section className="facilities section" id="facilities" ref={containerRef}>
+      {/* Background Parallax Typography Layer */}
+      <div className="facilities__bg-typography">WELLNESS</div>
 
-        <motion.h2
-          className="facilities__heading section-title"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          Our Facilities &amp; Services
-        </motion.h2>
+      <div className="container">
+        <span className="section-label">// WHAT WE OFFER</span>
+
+        {/* Heading Split for Kinetic Typography */}
+        <h2 className="facilities__heading section-title" style={{ overflow: 'hidden' }}>
+          {headingText.split('').map((char, index) => (
+            <span key={index} className="facilities__char" style={{ display: 'inline-block' }}>
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
+        </h2>
 
         <div className="facilities__grid">
-          {facilities.map((facility, i) => {
+          {facilities.map((facility) => {
             const Icon = facility.icon;
             return (
-              <motion.div
+              <div
                 className={`facilities__card facilities__card--${facility.id} brutal-card`}
                 key={facility.id}
-                variants={cardVariants}
-                initial="hidden"
-                animate={isInView ? 'visible' : 'hidden'}
-                custom={i}
               >
-                {/* Badge sticker */}
-                <span className="facilities__badge">
-                  {facility.badge}
-                </span>
+                {/* Background active glow element */}
+                <div className="facilities__card-glow" />
 
-                {/* Icon */}
+                {/* Badge sticker */}
+                <span className="facilities__badge">{facility.badge}</span>
+
+                {/* Icon wrapper */}
                 <div className="facilities__icon">
                   <Icon />
                 </div>
@@ -159,7 +197,7 @@ export default function Facilities() {
                   {facility.features.map((feature) => (
                     <li className="facilities__feature" key={feature}>
                       <LuCheck className="facilities__check" />
-                      {feature}
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -171,7 +209,7 @@ export default function Facilities() {
                 >
                   {facility.cta}
                 </Link>
-              </motion.div>
+              </div>
             );
           })}
         </div>
