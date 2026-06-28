@@ -66,8 +66,8 @@ const facilities = [
     title: 'The Fitness Cafe',
     icon: LuCoffee,
     badge: 'Healthy Nutrition',
-    link: '/shop',
-    cta: 'Explore Shop & Cafe',
+    link: '/cafe',
+    cta: 'View Cafe Menu',
     features: [
       'Dietician-Approved Meal Plans',
       'Protein Shakes & Fresh Juices',

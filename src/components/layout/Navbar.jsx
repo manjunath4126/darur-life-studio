@@ -1,23 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LuShoppingCart, LuMenu, LuX, LuUser } from 'react-icons/lu';
+import { LuMenu, LuX, LuUser } from 'react-icons/lu';
 import { useAuth } from '../../context/AuthContext.jsx';
-import { useCart } from '../../context/CartContext.jsx';
 import './Navbar.css';
 
 const NAV_LINKS = [
   { path: '/', label: 'Home' },
   { path: '/swimming', label: 'Swimming' },
   { path: '/gym', label: 'Gym' },
-  { path: '/shop', label: 'Shop' },
+  { path: '/cafe', label: 'Cafeteria' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
-  const { totalItems } = useCart();
   const location = useLocation();
 
   // Track scroll for background change
@@ -77,22 +75,6 @@ export default function Navbar() {
 
           {/* Right Actions */}
           <div className="navbar__actions">
-            {/* Cart */}
-            <Link to="/shop" className="navbar__cart" aria-label="Shopping cart">
-              <LuShoppingCart />
-              {totalItems > 0 && (
-                <motion.span
-                  className="navbar__cart-badge"
-                  key={totalItems}
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-                >
-                  {totalItems}
-                </motion.span>
-              )}
-            </Link>
-
             {/* Auth / User (Desktop) */}
             {isAuthenticated ? (
               <div className="navbar__user">
@@ -215,14 +197,6 @@ export default function Navbar() {
                   Login / Register
                 </Link>
               )}
-              <Link
-                to="/shop"
-                className="brutal-btn brutal-btn--ghost"
-                onClick={() => setMobileOpen(false)}
-              >
-                <LuShoppingCart />
-                Cart {totalItems > 0 && `(${totalItems})`}
-              </Link>
             </div>
           </motion.div>
         )}

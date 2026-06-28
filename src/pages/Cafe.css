@@ -1,0 +1,114 @@
+/* ── Cafe Page Minimalist Ocean Style ── */
+.cafe-page {
+  min-height: 100vh;
+}
+
+.cafe-hero {
+  padding: var(--space-4xl) 0 var(--space-2xl) 0;
+  background-color: var(--bg-white);
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+  background: linear-gradient(135deg, rgba(75, 199, 207, 0.08) 0%, rgba(0, 68, 131, 0.03) 100%);
+}
+
+.cafe-title {
+  text-transform: uppercase;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  color: var(--ocean-deep);
+}
+
+.cafe-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+}
+
+/* ── Philosophy promise ── */
+.philosophy-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  border-left: 4px solid var(--ocean-teal) !important;
+  background: var(--bg-cream);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.philosophy-card__icon {
+  font-size: 2.2rem;
+  color: var(--ocean-teal);
+  flex-shrink: 0;
+}
+
+/* ── Menu Categories ── */
+.menu-category-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.category-icon {
+  font-size: 1.6rem;
+  color: var(--ocean-teal);
+  display: flex;
+  align-items: center;
+}
+
+.category-title {
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--ocean-deep);
+  text-transform: uppercase;
+}
+
+.menu-item-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+  height: 100%;
+}
+
+.item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.item-name {
+  font-size: 1rem;
+  color: var(--ocean-deep);
+}
+
+.item-price {
+  font-size: 1.05rem;
+  color: var(--ocean-teal);
+}
+
+.item-info {
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* ── Order section ── */
+.order-box {
+  padding: var(--space-xl);
+  background: var(--card-white);
+  border-radius: var(--radius-lg);
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .philosophy-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

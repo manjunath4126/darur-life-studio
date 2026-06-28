@@ -8,7 +8,7 @@ import WhatsAppFloat from './components/ui/WhatsAppFloat.jsx';
 import Home from './pages/Home.jsx';
 import Swimming from './pages/Swimming.jsx';
 import Gym from './pages/Gym.jsx';
-import Shop from './pages/Shop.jsx';
+import Cafe from './pages/Cafe.jsx';
 import Auth from './pages/Auth.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Admin from './pages/Admin.jsx';
@@ -23,7 +23,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/swimming" element={<Swimming />} />
           <Route path="/gym" element={<Gym />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/cafe" element={<Cafe />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admin" element={<Admin />} />

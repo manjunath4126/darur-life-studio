@@ -1,18 +1,7 @@
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
 import './Hero.css';
-
-const wordVariants = {
-  hidden: { y: '100%', opacity: 0 },
-  visible: (i) => ({
-    y: '0%',
-    opacity: 1,
-    transition: {
-      delay: 0.3 + i * 0.15,
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1], // Calming, fluid cubic ease
-    },
-  }),
-};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 25 },
@@ -42,8 +31,56 @@ const badgeVariants = {
 };
 
 export default function Hero() {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. Kinetic Typography Word Reveal
+      gsap.fromTo(
+        '.hero__word span',
+        { y: 120, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.4,
+          stagger: 0.2,
+          ease: 'power4.out',
+        }
+      );
+
+      // 2. Continuous Fluid Wave Bobbing
+      gsap.to('.hero__svg-waves path', {
+        y: '+=12',
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.25,
+        ease: 'sine.inOut',
+      });
+
+      // 3. Mouse Parallax Reveal
+      const handleMouseMove = (e) => {
+        const { clientX, clientY } = e;
+        const xPos = (clientX / window.innerWidth - 0.5) * 25;
+        const yPos = (clientY / window.innerHeight - 0.5) * 25;
+
+        gsap.to('.hero__wave-wrapper', {
+          x: xPos,
+          y: yPos,
+          duration: 1.2,
+          ease: 'power2.out',
+        });
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="hero">
+    <section className="hero" ref={containerRef}>
       {/* Premium Ambient Background Elements */}
       <div className="hero__ambient hero__ambient--1" />
       <div className="hero__ambient hero__ambient--2" />
@@ -79,15 +116,11 @@ export default function Hero() {
                 key={word}
                 style={{ display: 'block', overflow: 'hidden' }}
               >
-                <motion.span
-                  style={{ display: 'inline-block' }}
-                  variants={wordVariants}
-                  initial="hidden"
-                  animate="visible"
-                  custom={i}
+                <span
+                  style={{ display: 'inline-block', opacity: 0 }}
                 >
                   {word}
-                </motion.span>
+                </span>
               </span>
             ))}
           </h1>
@@ -120,12 +153,7 @@ export default function Hero() {
 
         {/* Right — Calming Ocean Waves SVG Visual */}
         <div className="hero__visual">
-          <motion.div
-            className="hero__wave-wrapper"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-          >
+          <div className="hero__wave-wrapper">
             <svg viewBox="0 0 400 400" className="hero__svg-waves" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="gradient-wave" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -141,7 +169,7 @@ export default function Hero() {
               {/* Float badge */}
               <circle cx="200" cy="220" r="10" fill="var(--ocean-shallow)" />
             </svg>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
