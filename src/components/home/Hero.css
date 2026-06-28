@@ -1,5 +1,5 @@
 /* ============================================
-   Hero Section — Minimalist Ocean Style
+   Hero Section — Antigravity Split-Tone Style
    ============================================ */
 
 .hero {
@@ -8,51 +8,26 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: var(--bg-white);
+  background: linear-gradient(90deg, #101214 50%, #eefbfd 50%);
   padding-top: 80px;
-}
-
-/* ── Ambient Floating Glows ── */
-.hero__ambient {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.45;
-}
-
-.hero__ambient--1 {
-  width: 350px;
-  height: 350px;
-  background: var(--ocean-shallow);
-  top: 10%;
-  right: 5%;
-}
-
-.hero__ambient--2 {
-  width: 400px;
-  height: 400px;
-  background: rgba(75, 199, 207, 0.2);
-  bottom: 5%;
-  left: -5%;
 }
 
 /* ── Container ── */
 .hero__container {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1.15fr 0.85fr;
   align-items: center;
-  gap: var(--space-xl);
+  gap: var(--space-2xl);
   position: relative;
   z-index: 2;
 }
 
-/* ── Left Content ── */
+/* ── Left Content (Dark charcoal side) ── */
 .hero__content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  color: #ffffff;
 }
 
 .hero__badge-container {
@@ -79,26 +54,26 @@
 
 .hero__word {
   display: block;
-  font-size: clamp(3.5rem, 8.5vw, 6.8rem);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
   letter-spacing: -0.04em;
 }
 
 .hero__word--swim {
-  color: var(--ocean-deep);
+  color: #ffffff;
 }
 
 .hero__word--lift {
-  color: var(--ocean-teal);
+  color: var(--ocean-shallow);
 }
 
 .hero__word--elevate {
-  color: var(--ocean-surface);
+  color: var(--ocean-teal);
 }
 
 .hero__subtitle {
   font-family: var(--font-body);
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: var(--space-xl);
   max-width: 500px;
   line-height: 1.6;
@@ -112,44 +87,71 @@
   width: 100%;
 }
 
-/* ── Right Side — Wave Graphic ── */
+/* ── Right Side (Serene pool-water blue side) ── */
 .hero__visual {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 3;
+  width: 100%;
 }
 
-.hero__wave-wrapper {
+.hero__art-wrapper {
+  position: relative;
   width: 100%;
   max-width: 440px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--bg-cream);
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-lg);
-  padding: var(--space-lg);
-  transition: all var(--transition-slow);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero__wave-wrapper:hover {
-  transform: scale(1.02);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--ocean-shallow);
+/* Kinetic typography mask behind the floating asset */
+.hero__kinetic-bg {
+  position: absolute;
+  font-family: var(--font-heading);
+  font-size: clamp(4.5rem, 11vw, 7.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgba(75, 199, 207, 0.15);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  text-align: center;
+  animation: kinetic-tracking 15s ease-in-out infinite alternate;
 }
 
-.hero__svg-waves {
+@keyframes kinetic-tracking {
+  0% {
+    letter-spacing: -0.05em;
+    opacity: 0.2;
+    transform: rotate(-2deg);
+  }
+  100% {
+    letter-spacing: 0.15em;
+    opacity: 0.75;
+    transform: rotate(2deg);
+  }
+}
+
+/* Zero-G Floating image asset styling */
+.hero__float-asset {
+  position: relative;
+  z-index: 2;
   width: 100%;
+  max-width: 380px;
   height: auto;
-  transform: scale(1.05);
+  filter: drop-shadow(0 20px 45px rgba(21, 49, 66, 0.18));
 }
 
-/* ── Responsive ── */
+/* ── Responsive Splits ── */
 @media (max-width: 992px) {
   .hero {
+    background: linear-gradient(180deg, #101214 45%, #eefbfd 45%);
     padding-top: 100px;
-    padding-bottom: var(--space-3xl);
+    padding-bottom: var(--space-4xl);
   }
 
   .hero__container {
@@ -184,13 +186,17 @@
     margin-top: var(--space-lg);
   }
 
-  .hero__wave-wrapper {
-    max-width: 350px;
+  .hero__art-wrapper {
+    max-width: 340px;
   }
 }
 
 @media (max-width: 480px) {
   .hero__word {
     font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+
+  .hero__kinetic-bg {
+    font-size: 3.5rem;
   }
 }

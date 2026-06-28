@@ -486,3 +486,22 @@ input, textarea, select {
     font-size: 1.4rem;
   }
 }
+
+/* ── Antigravity Zero-G floating helper classes ── */
+@keyframes antigravity-float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.floating-ui-element {
+  animation: antigravity-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
