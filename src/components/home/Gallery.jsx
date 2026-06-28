@@ -1,25 +1,31 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { LuCamera } from 'react-icons/lu';
 import './Gallery.css';
 
+// Import real photos
+import pool1 from '../../assets/pool_1.jpg';
+import gym1 from '../../assets/gym_1.png';
+import poolKid1 from '../../assets/pool_kid_1.png';
+import gym2 from '../../assets/gym_2.png';
+import poolKid2 from '../../assets/pool_kid_2.png';
+
 const items = [
-  { label: 'Pool Area', variant: 'pool', sub: 'Coming Soon' },
-  { label: 'Gym Floor', variant: 'gym', sub: 'Coming Soon' },
-  { label: 'Training', variant: 'training', sub: 'Coming Soon' },
-  { label: 'Members', variant: 'members', sub: 'Coming Soon' },
-  { label: 'Facility', variant: 'facility', sub: 'Coming Soon' },
-  { label: 'Events', variant: 'events', sub: 'Coming Soon' },
+  { label: 'Pool Deck', sub: 'Olympic Size Facility', image: pool1, variant: 'pool1' },
+  { label: 'Cardio Studio', sub: 'Premium Equipment', image: gym1, variant: 'gym1' },
+  { label: 'Learn to Swim (LTS)', sub: 'Coached Program', image: poolKid1, variant: 'kid1' },
+  { label: 'Strength Zone', sub: 'Integrated Health Club', image: gym2, variant: 'gym2' },
+  { label: 'Elite Academy', sub: 'Advanced Swim Program', image: poolKid2, variant: 'kid2' },
+  { label: 'Poolside Lounge', sub: 'Modern Architecture', image: pool1, variant: 'pool2' },
 ];
 
 const itemVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i) => ({
     opacity: 1,
-    scale: 1,
+    y: 0,
     transition: {
-      delay: 0.1 + i * 0.1,
-      duration: 0.45,
+      delay: 0.1 + i * 0.08,
+      duration: 0.55,
       ease: 'easeOut',
     },
   }),
@@ -53,16 +59,23 @@ export default function Gallery() {
         <div className="gallery__grid">
           {items.map((item, i) => (
             <motion.div
-              className={`gallery__item gallery__item--${item.variant} brutal-card`}
+              className={`gallery__item brutal-card`}
               key={item.variant}
               variants={itemVariants}
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
               custom={i}
             >
-              <LuCamera className="gallery__icon" />
-              <span className="gallery__label">{item.label}</span>
-              <span className="gallery__sublabel">{item.sub}</span>
+              {/* Real Image */}
+              <img src={item.image} alt={item.label} className="gallery__image" />
+
+              {/* Minimalist Overlay */}
+              <div className="gallery__overlay">
+                <div className="gallery__info">
+                  <span className="gallery__label">{item.label}</span>
+                  <span className="gallery__sublabel">{item.sub}</span>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
