@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
 import { LuCoffee, LuUtensils, LuShieldAlert, LuMessageCircle } from 'react-icons/lu';
+import cafeHeroImg from '../assets/cafe_hero.png';
 import './Cafe.css';
 
 export default function Cafe() {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Mouse move parallax for zero-gravity cafe visual
+      const handleMouseMove = (e) => {
+        const { clientX, clientY } = e;
+        const xPos = (clientX / window.innerWidth - 0.5) * 30;
+        const yPos = (clientY / window.innerHeight - 0.5) * 30;
+
+        gsap.to('.cafe-hero__art-wrapper', {
+          x: xPos,
+          y: yPos,
+          duration: 1.5,
+          ease: 'power2.out',
+        });
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const categories = [
     {
       title: 'PRE-WORKOUT ENERGY BOOSTERS',
@@ -35,19 +62,31 @@ export default function Cafe() {
   ];
 
   return (
-    <div className="page-wrapper cafe-page">
-      {/* Hero Banner */}
-      <section className="cafe-hero text-center">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+    <div className="page-wrapper cafe-page" ref={containerRef}>
+      {/* Hero Banner (Split-Tone Zero-G Layout) */}
+      <section className="cafe-hero">
+        <div className="container cafe-hero__container">
+          {/* Left Content (Dark charcoal background side) */}
+          <div className="cafe-hero__content">
             <span className="section-label">// NUTRITION &amp; VITALITY</span>
             <h1 className="cafe-title">FITNESS CAFETERIA</h1>
             <p className="cafe-subtitle">Clean fuel for your body. Zero refined sugar. Zero compromises.</p>
-          </motion.div>
+          </div>
+
+          {/* Right Visual (Serene pool-water blue side) */}
+          <div className="cafe-hero__visual">
+            <div className="cafe-hero__art-wrapper">
+              {/* Masked Kinetic Background */}
+              <div className="cafe-hero__kinetic-bg">FUEL</div>
+
+              {/* Zero-G Floating protein shaker and sliced strawberry fruits asset */}
+              <img
+                src={cafeHeroImg}
+                alt="Darur Life Cafeteria Zero-Gravity Shaker and Berries"
+                className="cafe-hero__float-asset floating-ui-element"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

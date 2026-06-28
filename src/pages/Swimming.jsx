@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
 import SlotBooking from '../components/swimming/SlotBooking.jsx';
+import swimmingHeroImg from '../assets/swimming_hero.png';
 import './Swimming.css';
 
 /* ── Page Variants ── */
@@ -10,27 +12,70 @@ const fadeUp = {
 };
 
 export default function Swimming() {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Mouse move parallax for zero-gravity swimming visual
+      const handleMouseMove = (e) => {
+        const { clientX, clientY } = e;
+        const xPos = (clientX / window.innerWidth - 0.5) * 30;
+        const yPos = (clientY / window.innerHeight - 0.5) * 30;
+
+        gsap.to('.swimming-hero__art-wrapper', {
+          x: xPos,
+          y: yPos,
+          duration: 1.5,
+          ease: 'power2.out',
+        });
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="swimming-page">
-      {/* ── Hero Banner ── */}
+    <div className="swimming-page" ref={containerRef}>
+      {/* ── Hero Banner (Split-Tone Zero-G Layout) ── */}
       <section className="swimming-hero">
-        <div className="container swimming-hero__content">
-          <motion.h1
-            className="swimming-hero__heading"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
-            SWIMMING ACADEMY
-          </motion.h1>
-          <motion.p
-            className="swimming-hero__subtitle"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-          >
-            Book your lane. Learn from experts. Dive in.
-          </motion.p>
+        <div className="container swimming-hero__container">
+          {/* Left Content (Dark charcoal background side) */}
+          <div className="swimming-hero__content">
+            <motion.h1
+              className="swimming-hero__heading"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+            >
+              SWIMMING ACADEMY
+            </motion.h1>
+            <motion.p
+              className="swimming-hero__subtitle"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.4 }}
+            >
+              Book your lane. Learn from experts. Dive in.
+            </motion.p>
+          </div>
+
+          {/* Right Visual (Serene pool-water blue side) */}
+          <div className="swimming-hero__visual">
+            <div className="swimming-hero__art-wrapper">
+              {/* Masked Kinetic Background */}
+              <div className="swimming-hero__kinetic-bg">SWIM</div>
+
+              {/* Zero-G Floating swim cap and goggles asset */}
+              <img
+                src={swimmingHeroImg}
+                alt="Darur Life Swimming Academy Zero-Gravity Cap and Goggles"
+                className="swimming-hero__float-asset floating-ui-element"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

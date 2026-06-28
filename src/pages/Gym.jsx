@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
 import { LuCheck, LuPhone, LuMapPin, LuMessageCircle } from 'react-icons/lu';
+import gymHeroImg from '../assets/gym_hero.png';
 import './Gym.css';
 
 export default function Gym() {
+  const containerRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -11,6 +14,29 @@ export default function Gym() {
     message: ''
   });
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Mouse move parallax for zero-gravity gym visual
+      const handleMouseMove = (e) => {
+        const { clientX, clientY } = e;
+        const xPos = (clientX / window.innerWidth - 0.5) * 30;
+        const yPos = (clientY / window.innerHeight - 0.5) * 30;
+
+        gsap.to('.gym-hero__art-wrapper', {
+          x: xPos,
+          y: yPos,
+          duration: 1.5,
+          ease: 'power2.out',
+        });
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const gymPlans = [
     {
@@ -75,21 +101,33 @@ export default function Gym() {
   };
 
   return (
-    <div className="page-wrapper gym-page">
-      {/* Hero Banner */}
-      <section className="gym-hero text-center">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+    <div className="page-wrapper gym-page" ref={containerRef}>
+      {/* Hero Banner (Split-Tone Zero-G Layout) */}
+      <section className="gym-hero">
+        <div className="container gym-hero__container">
+          {/* Left Content (Dark charcoal background side) */}
+          <div className="gym-hero__content">
             <span className="section-label">// DARE TO BE STRONG</span>
             <h1 className="gym-title">
               FITNESS CENTER &amp; STUDIOS
             </h1>
             <p className="gym-subtitle">Integrated strength training, group studios, and professional therapeutic care.</p>
-          </motion.div>
+          </div>
+
+          {/* Right Visual (Serene pool-water blue side) */}
+          <div className="gym-hero__visual">
+            <div className="gym-hero__art-wrapper">
+              {/* Masked Kinetic Background */}
+              <div className="gym-hero__kinetic-bg">LIFT</div>
+
+              {/* Zero-G Floating dumbbell and training watch asset */}
+              <img
+                src={gymHeroImg}
+                alt="Darur Life Gym Strength Dumbbell and Smart Watch"
+                className="gym-hero__float-asset floating-ui-element"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
