@@ -1,0 +1,383 @@
+/* ============================================
+   Studio Pages — Yoga, Zumba, Aerobics
+   Shared Stylesheet
+   ============================================ */
+
+.studio-page {
+  min-height: 100vh;
+}
+
+/* ── Split-Tone Hero ── */
+.studio-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--space-4xl) 0;
+}
+
+/* Yoga — teal-ocean accent */
+.studio-hero--yoga {
+  background: linear-gradient(90deg, #101214 55%, #eefbfd 45%);
+}
+
+/* Zumba — slightly warmer teal */
+.studio-hero--zumba {
+  background: linear-gradient(90deg, #101214 55%, #edf8fb 45%);
+}
+
+/* Aerobics — deep ocean accent */
+.studio-hero--aerobics {
+  background: linear-gradient(90deg, #101214 55%, #e8f6fa 45%);
+}
+
+/* Drifting background kinetic text */
+.studio-hero__bg-text {
+  position: absolute;
+  font-family: var(--font-heading);
+  font-size: clamp(8rem, 20vw, 15rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(75, 199, 207, 0.05);
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+  top: 50%;
+  left: 30%;
+  transform: translateY(-50%);
+  animation: studio-bg-drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes studio-bg-drift {
+  0% { letter-spacing: 0.05em; opacity: 0.04; }
+  100% { letter-spacing: 0.2em; opacity: 0.1; }
+}
+
+/* Hero layout grid */
+.studio-hero__container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: var(--space-2xl);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Floating image art wrapper (parallax target) ── */
+.studio-hero__art-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+/* Kinetic background word behind the floating image */
+.studio-hero__kinetic-bg {
+  position: absolute;
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(75, 199, 207, 0.08);
+  letter-spacing: 0.15em;
+  pointer-events: none;
+  z-index: 0;
+  animation: studio-bg-drift 20s ease-in-out infinite alternate;
+}
+
+/* Floating zero-gravity image */
+.studio-hero__float-asset {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: var(--radius-lg);
+  filter: drop-shadow(0 30px 60px rgba(0, 68, 131, 0.2));
+  object-fit: cover;
+}
+
+/* ── Pricing Card (below hero) ── */
+.studio-pricing {
+  background: var(--bg-white);
+}
+
+.studio-pricing__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 680px;
+  padding: var(--space-2xl);
+  border-left: 4px solid var(--ocean-teal);
+}
+
+.studio-pricing__price {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--ocean-deep);
+  margin: var(--space-xs) 0 0;
+  line-height: 1.1;
+}
+
+.studio-pricing__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.studio-pricing__features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.studio-check {
+  color: var(--ocean-teal);
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+/* Left — text content */
+.studio-hero__content {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.studio-hero__heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #ffffff;
+  margin: var(--space-sm) 0;
+}
+
+.studio-hero__heading-sub {
+  color: var(--ocean-shallow);
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+}
+
+.studio-hero__char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.studio-hero__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.75);
+  margin: var(--space-md) 0 var(--space-xl);
+  max-width: 520px;
+  line-height: 1.65;
+}
+
+.studio-hero__ctas {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Right — price card */
+.studio-hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.studio-hero__price-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: 0 20px 60px rgba(0, 68, 131, 0.12);
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  transition: box-shadow var(--transition-normal);
+}
+
+.studio-hero__price-card:hover {
+  box-shadow: 0 30px 80px rgba(0, 68, 131, 0.18);
+}
+
+.studio-hero__price {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--ocean-deep);
+  margin: var(--space-xs) 0 0;
+  line-height: 1;
+}
+
+/* ── Benefits Section ── */
+.studio-benefits {
+  background: var(--bg-white);
+}
+
+.studio-benefits__intro {
+  max-width: 720px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: var(--space-md) 0 var(--space-2xl);
+}
+
+.benefits-grid {
+  margin-top: var(--space-xl);
+}
+
+.benefit-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-xl);
+  border-left: 3px solid var(--ocean-teal);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.benefit-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.benefit-card__icon {
+  font-size: 1.8rem;
+  color: var(--ocean-teal);
+  display: flex;
+  align-items: center;
+}
+
+.benefit-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ocean-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.benefit-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Schedule ── */
+.schedule-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+}
+
+.schedule-card__time {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--ocean-deep);
+}
+
+/* ── Gallery placeholder ── */
+.studio-gallery__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  text-align: center;
+  gap: var(--space-sm);
+  border: 2px dashed var(--border-light);
+  background: var(--bg-cream);
+  box-shadow: none;
+}
+
+/* Gallery grid (used once user sends images) */
+.studio-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 220px;
+  gap: var(--space-md);
+}
+
+.studio-gallery__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.studio-gallery__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.studio-gallery__item:hover .studio-gallery__img {
+  transform: scale(1.06);
+}
+
+/* ── Responsive ── */
+@media (max-width: 992px) {
+  .studio-hero--yoga,
+  .studio-hero--zumba,
+  .studio-hero--aerobics {
+    background: linear-gradient(180deg, #101214 48%, #eefbfd 48%);
+    padding-top: 100px;
+    padding-bottom: var(--space-4xl);
+  }
+
+  .studio-hero__container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--space-2xl);
+  }
+
+  .studio-hero__content {
+    align-items: center;
+  }
+
+  .studio-hero__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .studio-hero__ctas {
+    justify-content: center;
+  }
+
+  .studio-hero__price-card {
+    max-width: 360px;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .studio-gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .studio-gallery__grid {
+    grid-template-columns: 1fr;
+  }
+}

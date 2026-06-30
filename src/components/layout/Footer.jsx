@@ -7,6 +7,9 @@ const QUICK_LINKS = [
   { path: '/', label: 'Home' },
   { path: '/swimming', label: 'Swimming' },
   { path: '/gym', label: 'Gym' },
+  { path: '/yoga', label: 'Yoga' },
+  { path: '/zumba', label: 'Zumba' },
+  { path: '/aerobics', label: 'Aerobics' },
   { path: '/cafe', label: 'Cafeteria' },
 ];
 
