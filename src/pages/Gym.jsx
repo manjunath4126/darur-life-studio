@@ -4,6 +4,11 @@ import gsap from 'gsap';
 import { LuCheck, LuPhone, LuMapPin, LuMessageCircle } from 'react-icons/lu';
 import gymHeroImg from '../assets/gym_hero.png';
 import gymCardioImg from '../assets/gym_cardio.jpg';
+import gymSquatImg from '../assets/gym_squat.jpg';
+import gymFloorImg from '../assets/gym_floor.jpg';
+import gymSteamImg from '../assets/gym_steam.jpg';
+import gym1 from '../assets/gym_1.png';
+import gym2 from '../assets/gym_2.png';
 import './Gym.css';
 
 export default function Gym() {
@@ -227,6 +232,66 @@ export default function Gym() {
                 <span className="text-mono text-xs text-muted">/ {item.term}</span>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gym Showcase Gallery */}
+      <section className="section gym-gallery bg-cream" style={{ borderTop: '1px solid var(--border-light)', borderBottom: '1px solid var(--border-light)' }}>
+        <div className="container">
+          <div className="text-center mb-xl">
+            <span className="section-label">// TRAINING ZONE</span>
+            <h2 className="section-title">INSIDE THE GYM FLOOR</h2>
+            <p className="text-sm text-secondary">A glimpse of our elite strength, cardio, and workout equipment.</p>
+          </div>
+
+          <div className="gym-showcase__grid">
+            <div className="gym-showcase__item brutal-card">
+              <img src={gymFloorImg} alt="Darur Life Gym workout floor" className="gym-showcase__img" />
+              <div className="gym-showcase__label">WORKOUT ZONE</div>
+            </div>
+            <div className="gym-showcase__item brutal-card">
+              <img src={gymSquatImg} alt="Heavy lifts squats smith machine" className="gym-showcase__img" />
+              <div className="gym-showcase__label">STRENGTH CORNER</div>
+            </div>
+            <div className="gym-showcase__item brutal-card">
+              <img src={gym1} alt="Cardio runners" className="gym-showcase__img" />
+              <div className="gym-showcase__label">CARDIO EQUIPMENT</div>
+            </div>
+            <div className="gym-showcase__item brutal-card">
+              <img src={gym2} alt="Dumbbells weight racks" className="gym-showcase__img" />
+              <div className="gym-showcase__label">FREE WEIGHTS</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Steam Bath Highlight Spotlight */}
+      <section className="section gym-steam-spotlight">
+        <div className="container">
+          <div className="gym-steam__grid">
+            <div className="gym-steam__visual brutal-card">
+              <img src={gymSteamImg} alt="Darur Life Studio — Premium Steam Bath Room" className="gym-steam__img" />
+            </div>
+            
+            <div className="gym-steam__content">
+              <span className="section-label">// RESTORE &amp; RECOVER</span>
+              <h2 className="section-title">PREMIUM STEAM BATH</h2>
+              <p className="gym-steam__text">
+                Detoxification, muscle relaxation, and deep rejuvenation. Our facility features custom-designed steam rooms that provide a therapeutic escape to soothe sore muscles, stimulate cardiovascular health, and restore your energy after intense training.
+              </p>
+              
+              <div className="brutal-divider" style={{ margin: 'var(--space-md) 0' }} />
+              
+              <ul className="gym-steam__benefits">
+                <li>☀️ <strong>Post-Workout Recovery:</strong> Relieves muscle tension and accelerates cellular repair.</li>
+                <li>☀️ <strong>Toxin Elimination:</strong> Profound sweat release clears pores and detoxifies the skin.</li>
+                <li>☀️ <strong>Cardiovascular Wellness:</strong> Warm temperatures improve circulation and blood flow.</li>
+                <li>☀️ <strong>Plan Inclusions:</strong> 2 sessions/month included in Standard Access; unlimited in All-Access.</li>
+              </ul>
+              
+              <a href="tel:+919381625959" className="brutal-btn brutal-btn--primary brutal-btn--lg mt-lg">Book Recovery Session</a>
+            </div>
           </div>
         </div>
       </section>

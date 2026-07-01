@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { path: '/zumba', label: 'Zumba' },
   { path: '/aerobics', label: 'Aerobics' },
   { path: '/cafe', label: 'Cafeteria' },
+  { path: '/gallery', label: 'Gallery' },
 ];
 
 export default function Navbar() {

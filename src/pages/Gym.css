@@ -251,6 +251,109 @@
   color: var(--text-secondary);
 }
 
+/* ── Gym Showcase Gallery ── */
+.gym-showcase__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.gym-showcase__item {
+  position: relative;
+  overflow: hidden;
+  height: 250px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.gym-showcase__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.gym-showcase__item:hover .gym-showcase__img {
+  transform: scale(1.05);
+}
+
+.gym-showcase__label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-md);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* ── Steam Bath Spotlight ── */
+.gym-steam__grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.gym-steam__visual {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
+  height: 480px;
+  padding: 0;
+  display: block;
+}
+
+.gym-steam__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-normal);
+}
+
+.gym-steam__visual:hover .gym-steam__img {
+  transform: scale(1.03);
+}
+
+.gym-steam__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gym-steam__text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-top: var(--space-md);
+}
+
+.gym-steam__benefits {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-md) 0 var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gym-steam__benefits li {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
 /* Responsive Splits */
 @media (max-width: 992px) {
   .gym-hero {
@@ -291,6 +394,19 @@
     grid-template-columns: 1fr;
     gap: var(--space-lg);
   }
+
+  .gym-showcase__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gym-steam__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .gym-steam__visual {
+    height: 360px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -302,6 +418,10 @@
   .gym-plans__cards {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
+  }
+
+  .gym-showcase__grid {
+    grid-template-columns: 1fr;
   }
 
   .contact-info-block {

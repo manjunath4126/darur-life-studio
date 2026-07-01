@@ -15,6 +15,7 @@ import Aerobics from './pages/Aerobics.jsx';
 import Auth from './pages/Auth.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Admin from './pages/Admin.jsx';
+import GalleryPage from './pages/GalleryPage.jsx';
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/yoga" element={<Yoga />} />
           <Route path="/zumba" element={<Zumba />} />
           <Route path="/aerobics" element={<Aerobics />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admin" element={<Admin />} />
