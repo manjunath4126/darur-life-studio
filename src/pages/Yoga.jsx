@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { LuHeart, LuWind, LuBrain, LuActivity, LuSun, LuShield, LuCheck, LuMessageCircle, LuPhone } from 'react-icons/lu';
 import yogaHeroImg from '../assets/yoga_hero.jpg';
+import yogaClassImg from '../assets/yoga_class.jpg';
 import './Studios.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -99,7 +100,7 @@ export default function Yoga() {
 
       {/* ── Pricing Card ── */}
       <section className="section studio-pricing">
-        <div className="container">
+        <div className="container studio-pricing__container-grid">
           <div className="studio-pricing__card brutal-card">
             <div>
               <span className="brutal-badge brutal-badge--blue text-mono mb-sm">MONTHLY PROGRAMME</span>
@@ -113,6 +114,10 @@ export default function Yoga() {
               ))}
             </ul>
             <a href="tel:+919381625959" className="brutal-btn brutal-btn--primary brutal-btn--lg">Enquire Now</a>
+          </div>
+
+          <div className="studio-pricing__image-wrapper brutal-card">
+            <img src={yogaClassImg} alt="Darur Life Studio — Yoga Class Session" className="studio-pricing__image" />
           </div>
         </div>
       </section>

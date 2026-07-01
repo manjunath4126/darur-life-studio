@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LuMenu, LuX, LuUser } from 'react-icons/lu';
 import { useAuth } from '../../context/AuthContext.jsx';
+import logoImg from '../../assets/darur_logo.png';
 import './Navbar.css';
 
 const NAV_LINKS = [
@@ -58,8 +59,8 @@ export default function Navbar() {
         <div className="navbar__inner">
           {/* Logo */}
           <Link to="/" className="navbar__logo">
-            <span className="navbar__logo-accent" />
-            <span className="navbar__logo-text">DARUR LIFE STUDIO &amp; HEALTH CLUB</span>
+            <img src={logoImg} alt="Darur Life Studio Logo" className="navbar__logo-img" />
+            <span className="navbar__logo-text">DARUR LIFE STUDIO</span>
           </Link>
 
           {/* Desktop Nav Links */}

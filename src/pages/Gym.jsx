@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { LuCheck, LuPhone, LuMapPin, LuMessageCircle } from 'react-icons/lu';
 import gymHeroImg from '../assets/gym_hero.png';
+import gymCardioImg from '../assets/gym_cardio.jpg';
 import './Gym.css';
 
 export default function Gym() {
@@ -171,31 +172,37 @@ export default function Gym() {
             <p className="text-sm text-secondary">Standard membership packages. Subject to GST.</p>
           </div>
 
-          <div className="grid-2 mb-2xl">
-            {gymPlans.map((plan, idx) => (
-              <motion.div
-                key={plan.name}
-                className="brutal-card plan-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.15 }}
-                style={{ borderLeft: `4px solid ${plan.color}` }}
-              >
-                <h3 className="plan-name font-bold mb-xs" style={{ color: 'var(--ocean-deep)' }}>{plan.name}</h3>
-                <p className="text-sm text-secondary mb-lg">{plan.description}</p>
-                <div className="brutal-divider" style={{ margin: 'var(--space-md) 0' }}></div>
-                <ul className="pricing-features mb-xl">
-                  {plan.pricing.map((tier, tidx) => (
-                    <li key={tidx} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span>{tier.term}</span>
-                      <span className="font-bold text-mono">{tier.price}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a href="tel:+919381625959" className="brutal-btn brutal-btn--primary w-full text-center">Inquire Plan</a>
-              </motion.div>
-            ))}
+          <div className="gym-plans__container-grid mb-2xl">
+            <div className="gym-plans__cards">
+              {gymPlans.map((plan, idx) => (
+                <motion.div
+                  key={plan.name}
+                  className="brutal-card plan-card"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.15 }}
+                  style={{ borderLeft: `4px solid ${plan.color}` }}
+                >
+                  <h3 className="plan-name font-bold mb-xs" style={{ color: 'var(--ocean-deep)' }}>{plan.name}</h3>
+                  <p className="text-sm text-secondary mb-lg">{plan.description}</p>
+                  <div className="brutal-divider" style={{ margin: 'var(--space-md) 0' }}></div>
+                  <ul className="pricing-features mb-xl">
+                    {plan.pricing.map((tier, tidx) => (
+                      <li key={tidx} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span>{tier.term}</span>
+                        <span className="font-bold text-mono">{tier.price}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a href="tel:+919381625959" className="brutal-btn brutal-btn--primary w-full text-center">Inquire Plan</a>
+                </motion.div>
+              ))}
+            </div>
+            
+            <div className="gym-plans__image-wrapper brutal-card">
+              <img src={gymCardioImg} alt="Darur Life Gym — Strength & Cardio Floor" className="gym-plans__image" />
+            </div>
           </div>
 
           {/* Studio Classes */}

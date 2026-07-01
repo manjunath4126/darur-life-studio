@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { LuHeart, LuZap, LuSmile, LuTrendingUp, LuUsers, LuMusic, LuCheck, LuMessageCircle, LuPhone } from 'react-icons/lu';
 import zumbaHeroImg from '../assets/zumba_hero.jpg';
+import zumbaClassImg from '../assets/zumba_class.jpg';
 import './Studios.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -91,7 +92,7 @@ export default function Zumba() {
 
       {/* ── Pricing Card ── */}
       <section className="section studio-pricing">
-        <div className="container">
+        <div className="container studio-pricing__container-grid">
           <div className="studio-pricing__card brutal-card">
             <div>
               <span className="brutal-badge brutal-badge--blue text-mono mb-sm">MONTHLY PROGRAMME</span>
@@ -105,6 +106,10 @@ export default function Zumba() {
               ))}
             </ul>
             <a href="tel:+919381625959" className="brutal-btn brutal-btn--primary brutal-btn--lg">Enquire Now</a>
+          </div>
+
+          <div className="studio-pricing__image-wrapper brutal-card">
+            <img src={zumbaClassImg} alt="Darur Life Studio — Zumba Class Session" className="studio-pricing__image" />
           </div>
         </div>
       </section>

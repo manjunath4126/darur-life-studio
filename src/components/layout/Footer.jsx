@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LuMapPin, LuPhone, LuClock, LuInstagram } from 'react-icons/lu';
+import logoImg from '../../assets/darur_logo.png';
 import './Footer.css';
 
 const QUICK_LINKS = [
@@ -40,7 +41,7 @@ export default function Footer() {
           {/* Col 1 — Logo & About */}
           <motion.div className="footer__col" variants={itemVariants}>
             <div className="footer__logo">
-              <span className="footer__logo-accent" />
+              <img src={logoImg} alt="Darur Life Studio Logo" className="footer__logo-img" />
               <span className="footer__logo-text">DARUR LIFE STUDIO</span>
             </div>
             <p className="footer__description">

@@ -45,11 +45,10 @@
   flex-shrink: 0;
 }
 
-.navbar__logo-accent {
-  width: 12px;
-  height: 12px;
-  background: var(--ocean-teal);
-  border-radius: 50%;
+.navbar__logo-img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
