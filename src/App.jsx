@@ -1,3 +1,4 @@
+// Rebuild trigger comment - Vercel webhook force
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar.jsx';
