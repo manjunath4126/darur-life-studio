@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { LuWaves, LuDumbbell, LuCheck, LuSparkles, LuActivity, LuCoffee, LuWifi } from 'react-icons/lu';
+import { LuWaves, LuDumbbell, LuCheck, LuSparkles, LuActivity, LuCoffee, LuWifi, LuFlame } from 'react-icons/lu';
+import gymSteamImg from '../../assets/gym_steam.jpg';
 import './Facilities.css';
 
 // Register GSAP plugins
@@ -43,7 +43,7 @@ const facilities = [
     title: 'Yoga, Zumba & Aerobics',
     icon: LuSparkles,
     badge: 'Group Studios',
-    link: '/gym',
+    link: '/yoga', // Updated to go directly to yoga
     cta: 'View Studio Classes',
     features: [
       'Certified Instructors',
@@ -94,6 +94,22 @@ const facilities = [
       'Perfect for Remote Professionals'
     ],
   },
+  {
+    id: 'steam',
+    title: 'Steam Bath & Detox',
+    icon: LuFlame,
+    badge: 'Premium Amenity',
+    link: '/gym',
+    cta: 'View Steam Benefits',
+    features: [
+      'Deep muscle tension release and recovery',
+      'Sweat out toxins and improve blood circulation',
+      'Post-workout recovery session bookings available',
+      'Complimentary access included in standard memberships'
+    ],
+    image: gymSteamImg,
+    featured: true
+  }
 ];
 
 export default function Facilities() {
@@ -173,6 +189,41 @@ export default function Facilities() {
         <div className="facilities__grid">
           {facilities.map((facility) => {
             const Icon = facility.icon;
+            
+            if (facility.featured) {
+              return (
+                <div
+                  className={`facilities__card facilities__card--featured facilities__card--${facility.id} brutal-card`}
+                  key={facility.id}
+                >
+                  <div className="facilities__featured-content">
+                    <span className="facilities__badge">{facility.badge}</span>
+                    <div className="facilities__icon">
+                      <Icon />
+                    </div>
+                    <h3 className="facilities__card-title">{facility.title}</h3>
+                    <ul className="facilities__features">
+                      {facility.features.map((feature) => (
+                        <li className="facilities__feature" key={feature}>
+                          <LuCheck className="facilities__check" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      to={facility.link}
+                      className="brutal-btn brutal-btn--ghost brutal-btn--sm facilities__cta mt-md"
+                    >
+                      {facility.cta}
+                    </Link>
+                  </div>
+                  <div className="facilities__featured-image-wrapper">
+                    <img src={facility.image} alt={facility.title} className="facilities__featured-image" />
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <div
                 className={`facilities__card facilities__card--${facility.id} brutal-card`}

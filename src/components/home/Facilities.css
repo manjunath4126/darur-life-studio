@@ -223,6 +223,65 @@
 .facilities__card--workspace:hover .facilities__icon svg path:nth-child(3) { animation-delay: 0.3s; }
 .facilities__card--workspace:hover .facilities__icon svg path:nth-child(4) { animation-delay: 0.45s; }
 
+/* 7. Steam Flame bobbing/flickering animation */
+@keyframes flame-steam {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.08) translateY(-4px);
+    opacity: 1;
+  }
+}
+.facilities__card--steam:hover .facilities__icon svg {
+  animation: flame-steam 1.2s ease-in-out infinite;
+}
+
+/* Featured Card Styles (For Steam Bath card) */
+.facilities__card--featured {
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  padding: 0 !important; /* Flush margins for image */
+  align-items: stretch;
+  background: var(--card-white);
+}
+
+.facilities__featured-content {
+  padding: var(--space-xl) var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+}
+
+.facilities__featured-content .facilities__cta {
+  width: auto;
+  min-width: 200px;
+}
+
+.facilities__featured-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  min-height: 280px;
+}
+
+.facilities__featured-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.facilities__card--featured:hover .facilities__featured-image {
+  transform: scale(1.04);
+}
+
 /* Card Title */
 .facilities__card-title {
   font-family: var(--font-heading);
@@ -285,6 +344,13 @@
   .facilities__bg-typography {
     display: none;
   }
+  .facilities__card--featured {
+    grid-column: span 2;
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+  .facilities__featured-content {
+    padding: var(--space-xl);
+  }
 }
 
 @media (max-width: 768px) {
@@ -295,5 +361,15 @@
 
   .facilities__card {
     padding: var(--space-lg);
+  }
+
+  .facilities__card--featured {
+    grid-column: span 1;
+    grid-template-columns: 1fr;
+  }
+
+  .facilities__featured-image-wrapper {
+    height: 240px;
+    min-height: auto;
   }
 }
